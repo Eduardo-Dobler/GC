@@ -1,0 +1,42 @@
+{
+  "name": "gc-demo-offline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c blue,green \"npm:dev -w @gc/api\" \"npm:dev -w @gc/web\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build:release",
+    "build:release": "node --import tsx scripts/build-release.ts",
+    "start:release": "node release/server.cjs",
+    "check": "npm run typecheck && npm run build && npm test"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.1.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/express": "5.0.0",
+    "@types/node": "22.13.1",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@types/supertest": "6.0.2",
+    "@vitejs/plugin-react": "4.3.4",
+    "concurrently": "9.1.2",
+    "esbuild": "0.25.0",
+    "jsdom": "26.0.0",
+    "supertest": "7.0.0",
+    "tsx": "4.23.13",
+    "typescript": "5.7.3",
+    "vite": "6.4.3",
+    "vitest": "4.1.11"
+  }
+}

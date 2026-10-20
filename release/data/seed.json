@@ -1,0 +1,2002 @@
+{
+  "schemaVersion": 1,
+  "community": {
+    "id": "community-senac-tech",
+    "name": "Comunidade SENAC Tech",
+    "description": "Espaço profissional para organizar pessoas, conversas, cargos e eventos do projeto.",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  "roles": [
+    {
+      "id": "role-owner",
+      "name": "Dono",
+      "color": "#f97316",
+      "rank": 100,
+      "system": true,
+      "permissions": [
+        "VIEW_PRIVATE_CHANNELS",
+        "POST_ANNOUNCEMENTS",
+        "MODERATE_MESSAGES",
+        "CREATE_EVENTS",
+        "MANAGE_EVENTS",
+        "MANAGE_MEMBERS",
+        "MODERATE_MEMBERS",
+        "MANAGE_ROLES",
+        "CREATE_INVITES",
+        "CREATE_CHANNELS"
+      ]
+    },
+    {
+      "id": "role-admin",
+      "name": "Administrador",
+      "color": "#272727",
+      "rank": 80,
+      "system": true,
+      "permissions": [
+        "VIEW_PRIVATE_CHANNELS",
+        "POST_ANNOUNCEMENTS",
+        "MODERATE_MESSAGES",
+        "CREATE_EVENTS",
+        "MANAGE_EVENTS",
+        "MANAGE_MEMBERS",
+        "MODERATE_MEMBERS",
+        "MANAGE_ROLES",
+        "CREATE_INVITES",
+        "CREATE_CHANNELS"
+      ]
+    },
+    {
+      "id": "role-moderator",
+      "name": "Moderador",
+      "color": "#555555",
+      "rank": 60,
+      "system": true,
+      "permissions": [
+        "VIEW_PRIVATE_CHANNELS",
+        "MODERATE_MESSAGES",
+        "MODERATE_MEMBERS",
+        "CREATE_INVITES",
+        "CREATE_CHANNELS"
+      ]
+    },
+    {
+      "id": "role-organizer",
+      "name": "Organizador de Eventos",
+      "color": "#a84300",
+      "rank": 40,
+      "system": true,
+      "permissions": [
+        "VIEW_PRIVATE_CHANNELS",
+        "CREATE_EVENTS",
+        "CREATE_INVITES",
+        "CREATE_CHANNELS"
+      ]
+    },
+    {
+      "id": "role-member",
+      "name": "Membro",
+      "color": "#777777",
+      "rank": 10,
+      "system": true,
+      "permissions": []
+    }
+  ],
+  "users": [
+    {
+      "id": "user-owner",
+      "name": "Carlos Barbosa",
+      "email": "carlos@gc.local",
+      "roleId": "role-owner",
+      "bio": "Responsável pela comunidade e pelas decisões principais do GC.",
+      "avatarColor": "#f97316",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-07-01T12:00:00.000Z",
+      "lastActiveAt": "2026-09-08T12:00:00.000Z",
+      "activity": [
+        {
+          "label": "Publicou o cronograma do projeto",
+          "date": "2026-09-08T11:10:00.000Z"
+        },
+        {
+          "label": "Criou a comunidade",
+          "date": "2026-07-01T12:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-admin",
+      "name": "Marina Costa",
+      "email": "marina@gc.local",
+      "roleId": "role-admin",
+      "bio": "Acompanha membros, permissões e organização do trabalho.",
+      "avatarColor": "#272727",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-07-02T14:00:00.000Z",
+      "lastActiveAt": "2026-09-08T11:45:00.000Z",
+      "activity": [
+        {
+          "label": "Atualizou o cargo de um membro",
+          "date": "2026-09-07T18:20:00.000Z"
+        },
+        {
+          "label": "Entrou na comunidade",
+          "date": "2026-07-02T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "f0828d388ed2ed9bced6012e6833304e",
+      "passwordHash": "1d53931b5da17fd5673c104b6f730db249ff3c28df13e390a1848551b46d18ac6b152494f69f8b3568caddf80e8991dbf9e749e0a2c1131c3f4e94da6d6cda87"
+    },
+    {
+      "id": "user-moderator",
+      "name": "Lucas Martins",
+      "email": "lucas@gc.local",
+      "roleId": "role-moderator",
+      "bio": "Ajuda a manter as conversas organizadas e respeitosas.",
+      "avatarColor": "#555555",
+      "status": "away",
+      "memberStatus": "active",
+      "joinedAt": "2026-07-03T14:00:00.000Z",
+      "lastActiveAt": "2026-09-08T10:50:00.000Z",
+      "activity": [
+        {
+          "label": "Revisou o canal de dúvidas",
+          "date": "2026-09-08T10:40:00.000Z"
+        },
+        {
+          "label": "Entrou na comunidade",
+          "date": "2026-07-03T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "5ed40bc7354b7452921b4fa648b440cc",
+      "passwordHash": "c171daa165ce3f99ef09c4d7a3e6c7a6d92f317b2b644c6d43aa0ab3319a3b910f5428e4224844562d4bdc77ba82e2eed65d4cf8c0c1c4b057041a5fdb84e846"
+    },
+    {
+      "id": "user-organizer",
+      "name": "Sofia Almeida",
+      "email": "sofia@gc.local",
+      "roleId": "role-organizer",
+      "bio": "Planeja encontros, oficinas e atividades para os membros.",
+      "avatarColor": "#a84300",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-07-04T14:00:00.000Z",
+      "lastActiveAt": "2026-09-08T11:30:00.000Z",
+      "activity": [
+        {
+          "label": "Criou o workshop de protótipos",
+          "date": "2026-09-07T16:00:00.000Z"
+        },
+        {
+          "label": "Entrou na comunidade",
+          "date": "2026-07-04T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "57c5caa5ebca49d69a55c57ac1bad1ff",
+      "passwordHash": "cfc8f5f0444e4a04f6541fd9a90f00fb536a7433929ffb97ab30b0e54d2e950af6de6f7c3088fb414601c8b7994c9a732656db0488b7db17d5e5cde769653f51"
+    },
+    {
+      "id": "user-member",
+      "name": "Pedro Santos",
+      "email": "pedro@gc.local",
+      "roleId": "role-member",
+      "bio": "Participa das conversas e atividades da comunidade.",
+      "avatarColor": "#777777",
+      "status": "offline",
+      "memberStatus": "active",
+      "joinedAt": "2026-07-05T14:00:00.000Z",
+      "lastActiveAt": "2026-09-07T21:15:00.000Z",
+      "activity": [
+        {
+          "label": "Confirmou presença no encontro mensal",
+          "date": "2026-09-07T21:10:00.000Z"
+        },
+        {
+          "label": "Entrou na comunidade",
+          "date": "2026-07-05T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "7b950ccd083e87bee561435ec86a5f93",
+      "passwordHash": "774edd8ab32c6997a53f955120b5ad60123be7212d8830beaa0568c874179a68d47703fce56c76c7e3484a7f9a3547bc447f43c3ad03710e3617cbe437ca7bbc"
+    },
+    {
+      "id": "user-ana",
+      "name": "Ana Laura",
+      "email": "ana@gc.local",
+      "roleId": "role-admin",
+      "bio": "Coordena encontros e projetos criativos da comunidade.",
+      "avatarColor": "#e65f00",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-11T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-11T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-rafael",
+      "name": "Rafael Oliveira",
+      "email": "rafael@gc.local",
+      "roleId": "role-moderator",
+      "bio": "Conecta pessoas e ajuda a manter as conversas ativas.",
+      "avatarColor": "#444444",
+      "status": "away",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-12T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-12T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-bianca",
+      "name": "Bianca Mendes",
+      "email": "bianca@gc.local",
+      "roleId": "role-organizer",
+      "bio": "Organiza atividades culturais e oficinas abertas.",
+      "avatarColor": "#b94d00",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-13T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-13T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-diego",
+      "name": "Diego Rocha",
+      "email": "diego@gc.local",
+      "roleId": "role-member",
+      "bio": "Apaixonado por tecnologia, esporte e novas conexões.",
+      "avatarColor": "#777777",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-14T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-14T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-julia",
+      "name": "Júlia Fernandes",
+      "email": "julia@gc.local",
+      "roleId": "role-member",
+      "bio": "Participa de clubes de leitura e ações da comunidade.",
+      "avatarColor": "#999999",
+      "status": "away",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-15T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-15T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-mateus",
+      "name": "Mateus Alves",
+      "email": "mateus@gc.local",
+      "roleId": "role-organizer",
+      "bio": "Cria eventos esportivos e encontros de convivência.",
+      "avatarColor": "#8c3f00",
+      "status": "online",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-16T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-16T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    },
+    {
+      "id": "user-fernanda",
+      "name": "Fernanda Lima",
+      "email": "fernanda@gc.local",
+      "roleId": "role-member",
+      "bio": "Explora projetos, trilhas e iniciativas locais.",
+      "avatarColor": "#666666",
+      "status": "offline",
+      "memberStatus": "active",
+      "joinedAt": "2026-08-17T14:00:00.000Z",
+      "lastActiveAt": "2026-09-15T11:00:00.000Z",
+      "activity": [
+        {
+          "label": "Participou de uma atividade da comunidade",
+          "date": "2026-09-15T10:00:00.000Z"
+        },
+        {
+          "label": "Entrou na rede GC",
+          "date": "2026-08-17T14:00:00.000Z"
+        }
+      ],
+      "passwordSalt": "ad2b6b0eb057ab061f7f8fb08c76a978",
+      "passwordHash": "f8036c88fbb41e9fb2db5b26af442ccc0e8c4b1f57ca8f682345f84c1e2e240d8664cb34cc989cf5f839b9c85566eea0e76e31686ab726d7b22958c4a0a17c0f"
+    }
+  ],
+  "channels": [
+    {
+      "id": "channel-announcements",
+      "name": "avisos",
+      "description": "Comunicados oficiais da comunidade.",
+      "type": "announcement",
+      "order": 1,
+      "allowedRoleIds": []
+    },
+    {
+      "id": "channel-general",
+      "name": "chat-geral",
+      "description": "Conversa aberta entre todos os membros.",
+      "type": "text",
+      "order": 2,
+      "allowedRoleIds": []
+    },
+    {
+      "id": "channel-questions",
+      "name": "duvidas",
+      "description": "Perguntas e ajuda sobre projetos.",
+      "type": "text",
+      "order": 3,
+      "allowedRoleIds": []
+    },
+    {
+      "id": "channel-events",
+      "name": "eventos",
+      "description": "Organização e lembretes de atividades.",
+      "type": "text",
+      "order": 4,
+      "allowedRoleIds": []
+    },
+    {
+      "id": "channel-team",
+      "name": "equipe",
+      "description": "Planejamento privado da equipe de gestão.",
+      "type": "private",
+      "order": 5,
+      "allowedRoleIds": [
+        "role-owner",
+        "role-admin",
+        "role-moderator",
+        "role-organizer"
+      ]
+    },
+    {
+      "id": "channel-demo-pending",
+      "name": "equipe-senac-tech",
+      "description": "Canal privado de exemplo aguardando aceite do Dono.",
+      "type": "private",
+      "order": 6,
+      "allowedRoleIds": [],
+      "allowedUserIds": [
+        "user-organizer"
+      ],
+      "createdBy": "user-organizer"
+    }
+  ],
+  "messages": [
+    {
+      "id": "message-01",
+      "channelId": "channel-announcements",
+      "authorId": "user-owner",
+      "content": "Bem-vindos à Comunidade SENAC Tech. Usem os canais para centralizar decisões e atividades.",
+      "createdAt": "2026-09-08T08:00:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-02",
+      "channelId": "channel-announcements",
+      "authorId": "user-admin",
+      "content": "O cronograma da apresentação foi atualizado. Confiram os próximos eventos.",
+      "createdAt": "2026-09-08T09:00:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-03",
+      "channelId": "channel-announcements",
+      "authorId": "user-owner",
+      "content": "Lembrete: cada cargo possui permissões diferentes nesta demonstração.",
+      "createdAt": "2026-09-08T10:00:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-04",
+      "channelId": "channel-general",
+      "authorId": "user-member",
+      "content": "Bom dia! Já revisei minha parte do protótipo.",
+      "createdAt": "2026-09-08T10:05:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-05",
+      "channelId": "channel-general",
+      "authorId": "user-organizer",
+      "content": "Ótimo, Pedro. Vou incluir isso na oficina de testes.",
+      "createdAt": "2026-09-08T10:08:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-06",
+      "channelId": "channel-general",
+      "authorId": "user-moderator",
+      "content": "Se alguém precisar de ajuda, pode marcar aqui.",
+      "createdAt": "2026-09-08T10:12:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-07",
+      "channelId": "channel-questions",
+      "authorId": "user-member",
+      "content": "Como vamos demonstrar a diferença entre os cargos?",
+      "createdAt": "2026-09-08T10:20:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-08",
+      "channelId": "channel-questions",
+      "authorId": "user-admin",
+      "content": "Vamos alternar entre as contas rápidas e repetir a mesma ação.",
+      "createdAt": "2026-09-08T10:24:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-09",
+      "channelId": "channel-events",
+      "authorId": "user-organizer",
+      "content": "O workshop de protótipos está aberto para confirmação de presença.",
+      "createdAt": "2026-09-08T10:30:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-10",
+      "channelId": "channel-events",
+      "authorId": "user-member",
+      "content": "Presença confirmada!",
+      "createdAt": "2026-09-08T10:34:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-11",
+      "channelId": "channel-team",
+      "authorId": "user-owner",
+      "content": "Equipe, validem os fluxos de convite e restauração antes da apresentação.",
+      "createdAt": "2026-09-08T10:40:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "message-12",
+      "channelId": "channel-team",
+      "authorId": "user-moderator",
+      "content": "A moderação de mensagens já está no roteiro de teste.",
+      "createdAt": "2026-09-08T10:45:00.000Z",
+      "updatedAt": null,
+      "deletedAt": null
+    }
+  ],
+  "directThreads": [
+    {
+      "id": "thread-owner-admin",
+      "participantIds": [
+        "user-owner",
+        "user-admin"
+      ],
+      "updatedAt": "2026-09-08T11:00:00.000Z"
+    },
+    {
+      "id": "thread-member-organizer",
+      "participantIds": [
+        "user-member",
+        "user-organizer"
+      ],
+      "updatedAt": "2026-09-08T10:58:00.000Z"
+    },
+    {
+      "id": "thread-demo-accepted-admin",
+      "participantIds": [
+        "user-organizer",
+        "user-admin"
+      ],
+      "updatedAt": "2026-09-22T12:20:00.000Z"
+    }
+  ],
+  "directMessages": [
+    {
+      "id": "direct-01",
+      "threadId": "thread-owner-admin",
+      "authorId": "user-owner",
+      "content": "Marina, pode revisar as permissões dos cargos?",
+      "createdAt": "2026-09-08T09:30:00.000Z"
+    },
+    {
+      "id": "direct-02",
+      "threadId": "thread-owner-admin",
+      "authorId": "user-admin",
+      "content": "Claro. Vou testar com as cinco contas.",
+      "createdAt": "2026-09-08T09:34:00.000Z"
+    },
+    {
+      "id": "direct-03",
+      "threadId": "thread-owner-admin",
+      "authorId": "user-owner",
+      "content": "Perfeito, depois registramos no roteiro.",
+      "createdAt": "2026-09-08T11:00:00.000Z"
+    },
+    {
+      "id": "direct-04",
+      "threadId": "thread-member-organizer",
+      "authorId": "user-member",
+      "content": "Sofia, ainda há vaga no workshop?",
+      "createdAt": "2026-09-08T10:40:00.000Z"
+    },
+    {
+      "id": "direct-05",
+      "threadId": "thread-member-organizer",
+      "authorId": "user-organizer",
+      "content": "Sim, pode confirmar presença pelo card do evento.",
+      "createdAt": "2026-09-08T10:48:00.000Z"
+    },
+    {
+      "id": "direct-06",
+      "threadId": "thread-member-organizer",
+      "authorId": "user-member",
+      "content": "Consegui. Obrigado!",
+      "createdAt": "2026-09-08T10:58:00.000Z"
+    },
+    {
+      "id": "direct-demo-accepted-01",
+      "threadId": "thread-demo-accepted-admin",
+      "authorId": "user-organizer",
+      "content": "Marina, podemos revisar o roteiro do evento?",
+      "createdAt": "2026-09-22T12:20:00.000Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "event-workshop",
+      "title": "Workshop de protótipos",
+      "description": "Revisão coletiva dos protótipos e preparação da apresentação.",
+      "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+      "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+      "startsAt": "2026-10-20T18:30:00.000Z",
+      "endsAt": "2026-10-20T20:00:00.000Z",
+      "category": "Workshop",
+      "color": "#f97316",
+      "recurring": false,
+      "recurrence": null,
+      "createdBy": "user-organizer",
+      "invitedUserIds": [
+        "user-owner",
+        "user-admin",
+        "user-moderator",
+        "user-member"
+      ],
+      "createdAt": "2026-09-07T16:00:00.000Z",
+      "updatedAt": "2026-09-07T16:00:00.000Z"
+    },
+    {
+      "id": "event-monthly",
+      "title": "Encontro mensal",
+      "description": "Resumo do mês, decisões abertas e próximos passos da comunidade.",
+      "locationDescription": "Sala Multiuso do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+      "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+      "startsAt": "2026-11-05T19:00:00.000Z",
+      "endsAt": "2026-11-05T20:30:00.000Z",
+      "category": "Reunião",
+      "color": "#f97316",
+      "recurring": true,
+      "recurrence": "monthly",
+      "createdBy": "user-admin",
+      "invitedUserIds": [
+        "user-owner",
+        "user-moderator",
+        "user-organizer",
+        "user-member"
+      ],
+      "createdAt": "2026-09-06T15:00:00.000Z",
+      "updatedAt": "2026-09-06T15:00:00.000Z"
+    },
+    {
+      "id": "event-presentation",
+      "title": "Ensaio da apresentação",
+      "description": "Simulação completa do case do GC para medir tempo e ajustar falas.",
+      "locationDescription": "Laboratório de Tecnologia do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+      "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+      "startsAt": "2026-11-18T17:30:00.000Z",
+      "endsAt": "2026-11-18T19:00:00.000Z",
+      "category": "Apresentação",
+      "color": "#f97316",
+      "recurring": false,
+      "recurrence": null,
+      "createdBy": "user-owner",
+      "invitedUserIds": [
+        "user-admin",
+        "user-moderator",
+        "user-organizer",
+        "user-member"
+      ],
+      "createdAt": "2026-09-08T08:30:00.000Z",
+      "updatedAt": "2026-09-08T08:30:00.000Z"
+    },
+    {
+      "id": "event-mentoring",
+      "title": "Plantão de dúvidas",
+      "description": "Espaço semanal para revisar tarefas e resolver bloqueios do projeto.",
+      "locationDescription": "Sala de estudos do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+      "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+      "startsAt": "2026-12-02T18:00:00.000Z",
+      "endsAt": "2026-12-02T19:00:00.000Z",
+      "category": "Mentoria",
+      "color": "#f97316",
+      "recurring": true,
+      "recurrence": "weekly",
+      "createdBy": "user-organizer",
+      "invitedUserIds": [
+        "user-member"
+      ],
+      "createdAt": "2026-09-08T09:10:00.000Z",
+      "updatedAt": "2026-09-08T09:10:00.000Z"
+    }
+  ],
+  "eventParticipants": [
+    {
+      "id": "participant-01",
+      "eventId": "event-workshop",
+      "userId": "user-owner",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:00:00.000Z"
+    },
+    {
+      "id": "participant-02",
+      "eventId": "event-workshop",
+      "userId": "user-member",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:10:00.000Z"
+    },
+    {
+      "id": "participant-03",
+      "eventId": "event-monthly",
+      "userId": "user-admin",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:20:00.000Z"
+    },
+    {
+      "id": "participant-04",
+      "eventId": "event-monthly",
+      "userId": "user-member",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:30:00.000Z"
+    },
+    {
+      "id": "participant-05",
+      "eventId": "event-presentation",
+      "userId": "user-owner",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:40:00.000Z"
+    },
+    {
+      "id": "participant-06",
+      "eventId": "event-presentation",
+      "userId": "user-moderator",
+      "status": "going",
+      "updatedAt": "2026-09-08T09:50:00.000Z"
+    },
+    {
+      "id": "participant-07",
+      "eventId": "event-mentoring",
+      "userId": "user-organizer",
+      "status": "going",
+      "updatedAt": "2026-09-08T10:00:00.000Z"
+    }
+  ],
+  "invites": [
+    {
+      "id": "invite-week",
+      "code": "GCDEMO",
+      "link": "http://localhost:3000/convite/GCDEMO",
+      "createdBy": "user-owner",
+      "createdAt": "2026-09-08T08:00:00.000Z",
+      "expiresAt": "2026-12-31T23:59:59.000Z",
+      "maxUses": 25,
+      "uses": 4,
+      "revokedAt": null
+    },
+    {
+      "id": "invite-team",
+      "code": "SENACT",
+      "link": "http://localhost:3000/convite/SENACT",
+      "createdBy": "user-admin",
+      "createdAt": "2026-09-08T08:30:00.000Z",
+      "expiresAt": "2026-11-30T23:59:59.000Z",
+      "maxUses": 10,
+      "uses": 2,
+      "revokedAt": null
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-01",
+      "actorId": "user-owner",
+      "action": "COMMUNITY_CREATED",
+      "targetType": "community",
+      "targetId": "community-senac-tech",
+      "details": "Comunidade de demonstração criada.",
+      "createdAt": "2026-07-01T12:00:00.000Z"
+    },
+    {
+      "id": "audit-02",
+      "actorId": "user-admin",
+      "action": "INVITE_CREATED",
+      "targetType": "invite",
+      "targetId": "invite-team",
+      "details": "Convite SENACT criado.",
+      "createdAt": "2026-09-08T08:30:00.000Z"
+    }
+  ],
+  "communityDirectory": [
+    {
+      "community": {
+        "id": "community-senac-tech",
+        "name": "Comunidade SENAC Tech",
+        "description": "Espaço profissional para organizar pessoas, conversas, cargos e eventos do projeto.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Tecnologia",
+      "accent": "#ff6a00",
+      "createdBy": "user-owner",
+      "memberIds": [
+        "user-owner",
+        "user-admin",
+        "user-moderator",
+        "user-organizer",
+        "user-member",
+        "user-ana",
+        "user-rafael",
+        "user-bianca",
+        "user-diego",
+        "user-julia",
+        "user-mateus",
+        "user-fernanda"
+      ]
+    },
+    {
+      "community": {
+        "id": "community-criativa-serra",
+        "name": "Criativa Serra",
+        "description": "Design, comunicação e projetos criativos que aproximam talentos da região.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Criatividade",
+      "accent": "#e65f00",
+      "createdBy": "user-owner",
+      "memberIds": [
+        "user-owner",
+        "user-admin",
+        "user-organizer",
+        "user-ana",
+        "user-bianca",
+        "user-julia"
+      ]
+    },
+    {
+      "community": {
+        "id": "community-circuito-empreendedor",
+        "name": "Circuito Empreendedor",
+        "description": "Troca de ideias entre quem cria negócios, projetos e oportunidades locais.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Negócios",
+      "accent": "#c45100",
+      "createdBy": "user-owner",
+      "memberIds": [
+        "user-owner",
+        "user-admin",
+        "user-moderator",
+        "user-ana",
+        "user-rafael",
+        "user-diego"
+      ]
+    },
+    {
+      "community": {
+        "id": "community-basquete-sabado",
+        "name": "Basquete de Sábado",
+        "description": "Partidas, treinos e resenhas para quem gosta de basquete.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Esporte",
+      "accent": "#ff7a1a",
+      "createdBy": "user-member",
+      "memberIds": [
+        "user-member",
+        "user-organizer",
+        "user-rafael",
+        "user-diego",
+        "user-mateus"
+      ]
+    },
+    {
+      "community": {
+        "id": "community-trilhas-serra",
+        "name": "Trilhas da Serra",
+        "description": "Caminhadas, natureza e roteiros de convivência pela Serra Gaúcha.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Convívio",
+      "accent": "#8c3f00",
+      "createdBy": "user-member",
+      "memberIds": [
+        "user-member",
+        "user-organizer",
+        "user-bianca",
+        "user-julia",
+        "user-mateus",
+        "user-fernanda"
+      ]
+    },
+    {
+      "community": {
+        "id": "community-cultura-roda",
+        "name": "Cultura em Roda",
+        "description": "Clube aberto para livros, música, cinema e encontros culturais.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "category": "Cultura",
+      "accent": "#555555",
+      "createdBy": "user-admin",
+      "memberIds": [
+        "user-admin",
+        "user-moderator",
+        "user-organizer",
+        "user-bianca",
+        "user-julia",
+        "user-fernanda"
+      ]
+    }
+  ],
+  "demoAccountIds": [
+    "user-owner",
+    "user-admin",
+    "user-moderator",
+    "user-organizer",
+    "user-member",
+    "user-ana",
+    "user-rafael",
+    "user-bianca",
+    "user-diego",
+    "user-julia",
+    "user-mateus",
+    "user-fernanda"
+  ],
+  "communitySpaces": [
+    {
+      "community": {
+        "id": "community-criativa-serra",
+        "name": "Criativa Serra",
+        "description": "Design, comunicação e projetos criativos que aproximam talentos da região.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "memberships": [
+        {
+          "userId": "user-owner",
+          "roleId": "role-owner",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-admin",
+          "roleId": "role-organizer",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-organizer",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-ana",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-bianca",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-julia",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        }
+      ],
+      "roles": [
+        {
+          "id": "role-owner",
+          "name": "Dono",
+          "color": "#f97316",
+          "rank": 100,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-admin",
+          "name": "Administrador",
+          "color": "#272727",
+          "rank": 80,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-moderator",
+          "name": "Moderador",
+          "color": "#555555",
+          "rank": 60,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "MODERATE_MESSAGES",
+            "MODERATE_MEMBERS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-organizer",
+          "name": "Organizador de Eventos",
+          "color": "#a84300",
+          "rank": 40,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "CREATE_EVENTS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-member",
+          "name": "Membro",
+          "color": "#777777",
+          "rank": 10,
+          "system": true,
+          "permissions": []
+        }
+      ],
+      "channels": [
+        {
+          "id": "community-criativa-serra-announcements",
+          "name": "avisos",
+          "description": "Comunicados e novidades do grupo.",
+          "type": "announcement",
+          "order": 1,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        },
+        {
+          "id": "community-criativa-serra-general",
+          "name": "chat-geral",
+          "description": "Design, comunicação e projetos criativos que aproximam talentos da região.",
+          "type": "text",
+          "order": 2,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        }
+      ],
+      "messages": [
+        {
+          "id": "community-criativa-serra-welcome",
+          "channelId": "community-criativa-serra-announcements",
+          "authorId": "user-owner",
+          "content": "Bem-vindos! Nosso próximo encontro já está nos eventos. Confirmem a presença para organizarmos tudo.",
+          "createdAt": "2026-09-21T15:00:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        },
+        {
+          "id": "community-criativa-serra-reply",
+          "channelId": "community-criativa-serra-general",
+          "authorId": "user-admin",
+          "content": "Vou participar! Também conheço o pessoal de outras comunidades daqui. Vamos trocar ideias no encontro.",
+          "createdAt": "2026-09-21T15:10:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        }
+      ],
+      "events": [
+        {
+          "id": "community-criativa-serra-event",
+          "title": "Encontro de portfólios e ideias",
+          "description": "Encontro de demonstração para aproximar as pessoas de Criativa Serra. Local ilustrativo: SENAC Caxias do Sul.",
+          "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+          "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+          "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+          "startsAt": "2026-10-15T18:00:00.000Z",
+          "endsAt": "2026-10-15T20:00:00.000Z",
+          "category": "Criatividade",
+          "color": "#e65f00",
+          "recurring": false,
+          "recurrence": null,
+          "createdBy": "user-admin",
+          "invitedUserIds": [
+            "user-owner",
+            "user-admin",
+            "user-organizer",
+            "user-ana",
+            "user-bianca",
+            "user-julia"
+          ],
+          "createdAt": "2026-09-07T16:00:00.000Z",
+          "updatedAt": "2026-09-07T16:00:00.000Z"
+        }
+      ],
+      "eventParticipants": [],
+      "invites": [],
+      "auditLogs": []
+    },
+    {
+      "community": {
+        "id": "community-circuito-empreendedor",
+        "name": "Circuito Empreendedor",
+        "description": "Troca de ideias entre quem cria negócios, projetos e oportunidades locais.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "memberships": [
+        {
+          "userId": "user-owner",
+          "roleId": "role-owner",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-admin",
+          "roleId": "role-organizer",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-moderator",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-ana",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-rafael",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-diego",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        }
+      ],
+      "roles": [
+        {
+          "id": "role-owner",
+          "name": "Dono",
+          "color": "#f97316",
+          "rank": 100,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-admin",
+          "name": "Administrador",
+          "color": "#272727",
+          "rank": 80,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-moderator",
+          "name": "Moderador",
+          "color": "#555555",
+          "rank": 60,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "MODERATE_MESSAGES",
+            "MODERATE_MEMBERS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-organizer",
+          "name": "Organizador de Eventos",
+          "color": "#a84300",
+          "rank": 40,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "CREATE_EVENTS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-member",
+          "name": "Membro",
+          "color": "#777777",
+          "rank": 10,
+          "system": true,
+          "permissions": []
+        }
+      ],
+      "channels": [
+        {
+          "id": "community-circuito-empreendedor-announcements",
+          "name": "avisos",
+          "description": "Comunicados e novidades do grupo.",
+          "type": "announcement",
+          "order": 1,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        },
+        {
+          "id": "community-circuito-empreendedor-general",
+          "name": "chat-geral",
+          "description": "Troca de ideias entre quem cria negócios, projetos e oportunidades locais.",
+          "type": "text",
+          "order": 2,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        }
+      ],
+      "messages": [
+        {
+          "id": "community-circuito-empreendedor-welcome",
+          "channelId": "community-circuito-empreendedor-announcements",
+          "authorId": "user-owner",
+          "content": "Bem-vindos! Nosso próximo encontro já está nos eventos. Confirmem a presença para organizarmos tudo.",
+          "createdAt": "2026-09-21T15:00:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        },
+        {
+          "id": "community-circuito-empreendedor-reply",
+          "channelId": "community-circuito-empreendedor-general",
+          "authorId": "user-admin",
+          "content": "Vou participar! Também conheço o pessoal de outras comunidades daqui. Vamos trocar ideias no encontro.",
+          "createdAt": "2026-09-21T15:10:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        }
+      ],
+      "events": [
+        {
+          "id": "community-circuito-empreendedor-event",
+          "title": "Café com empreendedores",
+          "description": "Encontro de demonstração para aproximar as pessoas de Circuito Empreendedor. Local ilustrativo: SENAC Caxias do Sul.",
+          "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+          "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+          "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+          "startsAt": "2026-10-16T18:00:00.000Z",
+          "endsAt": "2026-10-16T20:00:00.000Z",
+          "category": "Negócios",
+          "color": "#c45100",
+          "recurring": false,
+          "recurrence": null,
+          "createdBy": "user-admin",
+          "invitedUserIds": [
+            "user-owner",
+            "user-admin",
+            "user-moderator",
+            "user-ana",
+            "user-rafael",
+            "user-diego"
+          ],
+          "createdAt": "2026-09-07T16:00:00.000Z",
+          "updatedAt": "2026-09-07T16:00:00.000Z"
+        }
+      ],
+      "eventParticipants": [],
+      "invites": [],
+      "auditLogs": []
+    },
+    {
+      "community": {
+        "id": "community-basquete-sabado",
+        "name": "Basquete de Sábado",
+        "description": "Partidas, treinos e resenhas para quem gosta de basquete.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "memberships": [
+        {
+          "userId": "user-member",
+          "roleId": "role-owner",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-organizer",
+          "roleId": "role-organizer",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-rafael",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-diego",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-mateus",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        }
+      ],
+      "roles": [
+        {
+          "id": "role-owner",
+          "name": "Dono",
+          "color": "#f97316",
+          "rank": 100,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-admin",
+          "name": "Administrador",
+          "color": "#272727",
+          "rank": 80,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-moderator",
+          "name": "Moderador",
+          "color": "#555555",
+          "rank": 60,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "MODERATE_MESSAGES",
+            "MODERATE_MEMBERS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-organizer",
+          "name": "Organizador de Eventos",
+          "color": "#a84300",
+          "rank": 40,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "CREATE_EVENTS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-member",
+          "name": "Membro",
+          "color": "#777777",
+          "rank": 10,
+          "system": true,
+          "permissions": []
+        }
+      ],
+      "channels": [
+        {
+          "id": "community-basquete-sabado-announcements",
+          "name": "avisos",
+          "description": "Comunicados e novidades do grupo.",
+          "type": "announcement",
+          "order": 1,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        },
+        {
+          "id": "community-basquete-sabado-general",
+          "name": "chat-geral",
+          "description": "Partidas, treinos e resenhas para quem gosta de basquete.",
+          "type": "text",
+          "order": 2,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        }
+      ],
+      "messages": [
+        {
+          "id": "community-basquete-sabado-welcome",
+          "channelId": "community-basquete-sabado-announcements",
+          "authorId": "user-member",
+          "content": "Bem-vindos! Nosso próximo encontro já está nos eventos. Confirmem a presença para organizarmos tudo.",
+          "createdAt": "2026-09-21T15:00:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        },
+        {
+          "id": "community-basquete-sabado-reply",
+          "channelId": "community-basquete-sabado-general",
+          "authorId": "user-organizer",
+          "content": "Vou participar! Também conheço o pessoal de outras comunidades daqui. Vamos trocar ideias no encontro.",
+          "createdAt": "2026-09-21T15:10:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        }
+      ],
+      "events": [
+        {
+          "id": "community-basquete-sabado-event",
+          "title": "Encontro da turma do basquete",
+          "description": "Encontro de demonstração para aproximar as pessoas de Basquete de Sábado. Local ilustrativo: SENAC Caxias do Sul.",
+          "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+          "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+          "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+          "startsAt": "2026-10-17T18:00:00.000Z",
+          "endsAt": "2026-10-17T20:00:00.000Z",
+          "category": "Esporte",
+          "color": "#ff7a1a",
+          "recurring": false,
+          "recurrence": null,
+          "createdBy": "user-organizer",
+          "invitedUserIds": [
+            "user-member",
+            "user-organizer",
+            "user-rafael",
+            "user-diego",
+            "user-mateus"
+          ],
+          "createdAt": "2026-09-07T16:00:00.000Z",
+          "updatedAt": "2026-09-07T16:00:00.000Z"
+        }
+      ],
+      "eventParticipants": [],
+      "invites": [],
+      "auditLogs": []
+    },
+    {
+      "community": {
+        "id": "community-trilhas-serra",
+        "name": "Trilhas da Serra",
+        "description": "Caminhadas, natureza e roteiros de convivência pela Serra Gaúcha.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "memberships": [
+        {
+          "userId": "user-member",
+          "roleId": "role-owner",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-organizer",
+          "roleId": "role-organizer",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-bianca",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-julia",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-mateus",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-fernanda",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        }
+      ],
+      "roles": [
+        {
+          "id": "role-owner",
+          "name": "Dono",
+          "color": "#f97316",
+          "rank": 100,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-admin",
+          "name": "Administrador",
+          "color": "#272727",
+          "rank": 80,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-moderator",
+          "name": "Moderador",
+          "color": "#555555",
+          "rank": 60,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "MODERATE_MESSAGES",
+            "MODERATE_MEMBERS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-organizer",
+          "name": "Organizador de Eventos",
+          "color": "#a84300",
+          "rank": 40,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "CREATE_EVENTS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-member",
+          "name": "Membro",
+          "color": "#777777",
+          "rank": 10,
+          "system": true,
+          "permissions": []
+        }
+      ],
+      "channels": [
+        {
+          "id": "community-trilhas-serra-announcements",
+          "name": "avisos",
+          "description": "Comunicados e novidades do grupo.",
+          "type": "announcement",
+          "order": 1,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        },
+        {
+          "id": "community-trilhas-serra-general",
+          "name": "chat-geral",
+          "description": "Caminhadas, natureza e roteiros de convivência pela Serra Gaúcha.",
+          "type": "text",
+          "order": 2,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        }
+      ],
+      "messages": [
+        {
+          "id": "community-trilhas-serra-welcome",
+          "channelId": "community-trilhas-serra-announcements",
+          "authorId": "user-member",
+          "content": "Bem-vindos! Nosso próximo encontro já está nos eventos. Confirmem a presença para organizarmos tudo.",
+          "createdAt": "2026-09-21T15:00:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        },
+        {
+          "id": "community-trilhas-serra-reply",
+          "channelId": "community-trilhas-serra-general",
+          "authorId": "user-organizer",
+          "content": "Vou participar! Também conheço o pessoal de outras comunidades daqui. Vamos trocar ideias no encontro.",
+          "createdAt": "2026-09-21T15:10:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        }
+      ],
+      "events": [
+        {
+          "id": "community-trilhas-serra-event",
+          "title": "Planejamento da próxima trilha",
+          "description": "Encontro de demonstração para aproximar as pessoas de Trilhas da Serra. Local ilustrativo: SENAC Caxias do Sul.",
+          "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+          "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+          "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+          "startsAt": "2026-10-18T18:00:00.000Z",
+          "endsAt": "2026-10-18T20:00:00.000Z",
+          "category": "Convívio",
+          "color": "#8c3f00",
+          "recurring": false,
+          "recurrence": null,
+          "createdBy": "user-organizer",
+          "invitedUserIds": [
+            "user-member",
+            "user-organizer",
+            "user-bianca",
+            "user-julia",
+            "user-mateus",
+            "user-fernanda"
+          ],
+          "createdAt": "2026-09-07T16:00:00.000Z",
+          "updatedAt": "2026-09-07T16:00:00.000Z"
+        }
+      ],
+      "eventParticipants": [],
+      "invites": [],
+      "auditLogs": []
+    },
+    {
+      "community": {
+        "id": "community-cultura-roda",
+        "name": "Cultura em Roda",
+        "description": "Clube aberto para livros, música, cinema e encontros culturais.",
+        "createdAt": "2026-09-15T11:00:00.000Z"
+      },
+      "memberships": [
+        {
+          "userId": "user-admin",
+          "roleId": "role-owner",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-moderator",
+          "roleId": "role-organizer",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-organizer",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-bianca",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-julia",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        },
+        {
+          "userId": "user-fernanda",
+          "roleId": "role-member",
+          "memberStatus": "active"
+        }
+      ],
+      "roles": [
+        {
+          "id": "role-owner",
+          "name": "Dono",
+          "color": "#f97316",
+          "rank": 100,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-admin",
+          "name": "Administrador",
+          "color": "#272727",
+          "rank": 80,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "POST_ANNOUNCEMENTS",
+            "MODERATE_MESSAGES",
+            "CREATE_EVENTS",
+            "MANAGE_EVENTS",
+            "MANAGE_MEMBERS",
+            "MODERATE_MEMBERS",
+            "MANAGE_ROLES",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-moderator",
+          "name": "Moderador",
+          "color": "#555555",
+          "rank": 60,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "MODERATE_MESSAGES",
+            "MODERATE_MEMBERS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-organizer",
+          "name": "Organizador de Eventos",
+          "color": "#a84300",
+          "rank": 40,
+          "system": true,
+          "permissions": [
+            "VIEW_PRIVATE_CHANNELS",
+            "CREATE_EVENTS",
+            "CREATE_INVITES",
+            "CREATE_CHANNELS"
+          ]
+        },
+        {
+          "id": "role-member",
+          "name": "Membro",
+          "color": "#777777",
+          "rank": 10,
+          "system": true,
+          "permissions": []
+        }
+      ],
+      "channels": [
+        {
+          "id": "community-cultura-roda-announcements",
+          "name": "avisos",
+          "description": "Comunicados e novidades do grupo.",
+          "type": "announcement",
+          "order": 1,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        },
+        {
+          "id": "community-cultura-roda-general",
+          "name": "chat-geral",
+          "description": "Clube aberto para livros, música, cinema e encontros culturais.",
+          "type": "text",
+          "order": 2,
+          "allowedRoleIds": [],
+          "allowedUserIds": []
+        }
+      ],
+      "messages": [
+        {
+          "id": "community-cultura-roda-welcome",
+          "channelId": "community-cultura-roda-announcements",
+          "authorId": "user-admin",
+          "content": "Bem-vindos! Nosso próximo encontro já está nos eventos. Confirmem a presença para organizarmos tudo.",
+          "createdAt": "2026-09-21T15:00:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        },
+        {
+          "id": "community-cultura-roda-reply",
+          "channelId": "community-cultura-roda-general",
+          "authorId": "user-moderator",
+          "content": "Vou participar! Também conheço o pessoal de outras comunidades daqui. Vamos trocar ideias no encontro.",
+          "createdAt": "2026-09-21T15:10:00.000Z",
+          "updatedAt": null,
+          "deletedAt": null
+        }
+      ],
+      "events": [
+        {
+          "id": "community-cultura-roda-event",
+          "title": "Roda de livros, música e cinema",
+          "description": "Encontro de demonstração para aproximar as pessoas de Cultura em Roda. Local ilustrativo: SENAC Caxias do Sul.",
+          "locationDescription": "Auditório de Informática do SENAC Caxias do Sul — Av. Júlio de Castilhos, 3638, Cinquentenário.",
+          "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638",
+          "googleMapsEmbedUrl": "https://www.google.com/maps?q=SENAC%20Caxias%20do%20Sul%2C%20Av.%20J%C3%BAlio%20de%20Castilhos%203638&output=embed",
+          "startsAt": "2026-10-19T18:00:00.000Z",
+          "endsAt": "2026-10-19T20:00:00.000Z",
+          "category": "Cultura",
+          "color": "#555555",
+          "recurring": false,
+          "recurrence": null,
+          "createdBy": "user-moderator",
+          "invitedUserIds": [
+            "user-admin",
+            "user-moderator",
+            "user-organizer",
+            "user-bianca",
+            "user-julia",
+            "user-fernanda"
+          ],
+          "createdAt": "2026-09-07T16:00:00.000Z",
+          "updatedAt": "2026-09-07T16:00:00.000Z"
+        }
+      ],
+      "eventParticipants": [],
+      "invites": [],
+      "auditLogs": []
+    }
+  ],
+  "accessPolicyVersion": 1,
+  "accessRequests": [
+    {
+      "id": "request-demo-direct-pending",
+      "kind": "direct",
+      "requesterId": "user-member",
+      "recipientId": "user-owner",
+      "communityId": "community-senac-tech",
+      "targetId": "thread-demo-pending-owner",
+      "title": "Conversa sobre a apresentação",
+      "participantIds": [
+        "user-member"
+      ],
+      "status": "pending",
+      "createdAt": "2026-09-22T12:00:00.000Z",
+      "updatedAt": "2026-09-22T12:00:00.000Z"
+    },
+    {
+      "id": "request-demo-channel-pending",
+      "kind": "channel",
+      "requesterId": "user-organizer",
+      "recipientId": "user-owner",
+      "communityId": "community-senac-tech",
+      "targetId": "channel-demo-pending",
+      "title": "Equipe SENAC Tech",
+      "participantIds": [],
+      "status": "pending",
+      "createdAt": "2026-09-22T12:10:00.000Z",
+      "updatedAt": "2026-09-22T12:10:00.000Z"
+    },
+    {
+      "id": "request-demo-direct-accepted",
+      "kind": "direct",
+      "requesterId": "user-organizer",
+      "recipientId": "user-admin",
+      "communityId": "community-senac-tech",
+      "targetId": "thread-demo-accepted-admin",
+      "title": "Planejamento do evento",
+      "participantIds": [
+        "user-organizer",
+        "user-admin"
+      ],
+      "status": "accepted",
+      "createdAt": "2026-09-22T11:40:00.000Z",
+      "updatedAt": "2026-09-22T11:50:00.000Z"
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-demo-owner-presentation",
+      "userId": "user-owner",
+      "title": "Roteiro da apresentação",
+      "content": "**Bem-vindos ao GC!**\n- Mostrar comunidades e conexões\n- Abrir os eventos com localização\n- Demonstrar solicitações e cargos",
+      "color": "#ff6a00",
+      "pinned": true,
+      "checklist": [
+        {
+          "text": "Abrir SENAC Tech",
+          "done": true
+        },
+        {
+          "text": "Mostrar comunidades sociais",
+          "done": false
+        },
+        {
+          "text": "Explicar solicitações",
+          "done": false
+        }
+      ],
+      "table": [
+        [
+          "Etapa",
+          "Responsável"
+        ],
+        [
+          "Comunidades",
+          "Carlos"
+        ],
+        [
+          "Eventos",
+          "Sofia"
+        ]
+      ],
+      "locationDescription": "SENAC Caxias do Sul — local da apresentação",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC+Caxias+do+Sul",
+      "createdAt": "2026-09-22T11:00:00.000Z",
+      "updatedAt": "2026-09-22T11:00:00.000Z"
+    },
+    {
+      "id": "note-demo-member-ideas",
+      "userId": "user-member",
+      "title": "Ideias para a comunidade",
+      "content": "**Basquete de Sábado**\n- Organizar o próximo jogo\n- Convidar mais pessoas do GC",
+      "color": "#d97706",
+      "pinned": false,
+      "checklist": [
+        {
+          "text": "Reservar a quadra",
+          "done": false
+        }
+      ],
+      "table": [],
+      "locationDescription": "",
+      "googleMapsUrl": "",
+      "createdAt": "2026-09-22T11:00:00.000Z",
+      "updatedAt": "2026-09-22T11:00:00.000Z"
+    },
+    {
+      "id": "note-demo-organizer-event",
+      "userId": "user-organizer",
+      "title": "Detalhes do próximo encontro",
+      "content": "*Conferir local e horários com a equipe.*\n[Ver local](https://www.google.com/maps/search/?api=1&query=SENAC+Caxias+do+Sul)",
+      "color": "#6b7280",
+      "pinned": true,
+      "checklist": [
+        {
+          "text": "Verificar a sala",
+          "done": true
+        },
+        {
+          "text": "Confirmar participantes",
+          "done": false
+        }
+      ],
+      "table": [
+        [
+          "Item",
+          "Situação"
+        ],
+        [
+          "Sala",
+          "Confirmar"
+        ]
+      ],
+      "locationDescription": "SENAC Caxias do Sul",
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SENAC+Caxias+do+Sul",
+      "createdAt": "2026-09-22T11:00:00.000Z",
+      "updatedAt": "2026-09-22T11:00:00.000Z"
+    }
+  ]
+}

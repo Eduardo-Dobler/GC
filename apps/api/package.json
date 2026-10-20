@@ -1,0 +1,16 @@
+{
+  "name": "@gc/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --import tsx src/server.ts",
+    "start": "node --import tsx src/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@gc/shared": "*",
+    "express": "5.1.0",
+    "zod": "3.25.76"
+  }
+}

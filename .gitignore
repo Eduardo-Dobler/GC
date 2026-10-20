@@ -1,0 +1,13 @@
+node_modules/
+coverage/
+apps/*/dist/
+data/gc-demo.json
+data/gc-demo.json.tmp
+release/data/gc-demo.json
+release/data/gc-demo.json.tmp
+*.log
+*.tsbuildinfo
+*.zip
+.DS_Store
+.superpowers/
+docs/superpowers/retrieved/
