@@ -1,3 +1,4 @@
+import { SettingsPage } from './pages/SettingsPage';
 import { RequestsPage } from './pages/RequestsPage';
 import { NotesPage } from './pages/NotesPage';
 import { CommunitiesPage } from './pages/CommunitiesPage';
@@ -28,6 +29,7 @@ function AuthenticatedApplication() {
   return (
     <AppShell key={activeCommunity?.id ?? 'default'}>
       <Routes>
+        <Route path="/configuracoes" element={<SettingsPage />} />
         <Route path="/solicitacoes" element={<RequestsPage />} />
         <Route path="/anotacoes" element={<NotesPage />} />
         <Route path="/comunidades" element={<CommunitiesPage />} />

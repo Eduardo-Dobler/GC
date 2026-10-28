@@ -113,6 +113,28 @@ export interface DirectMessage {
   authorId: string;
   content: string;
   createdAt: string;
+  isAutomatic?: boolean;
+}
+
+export interface UserPreferences {
+  autoReply: { enabled: boolean; message: string; timeZone: string };
+  sendOnEnter: boolean;
+  compactSidebar: boolean;
+}
+
+export interface UserSettings {
+  userId: string;
+  preferences: UserPreferences;
+}
+
+export interface SettingsView {
+  profile: Pick<User, 'id' | 'name' | 'email' | 'bio' | 'status' | 'avatarColor'>;
+  preferences: UserPreferences;
+}
+
+export interface SettingsUpdate {
+  profile?: Partial<Pick<User, 'name' | 'bio' | 'status' | 'avatarColor'>>;
+  preferences?: Partial<Omit<UserPreferences, 'autoReply'>> & { autoReply?: Partial<UserPreferences['autoReply']> };
 }
 
 export interface CommunityEvent {
@@ -212,6 +234,7 @@ export interface PersonalNote {
 }
 
 export interface DemoDatabase {
+  userSettings?: UserSettings[];
   accessPolicyVersion?: 1;
   accessRequests?: AccessRequest[];
   notes?: PersonalNote[];

@@ -21,7 +21,7 @@ export function ChannelsPage() {
   const { channelId } = useParams();
   const navigate = useNavigate();
   const notify = useToast();
-  const { user, permissions } = useAuth();
+  const { user, permissions, preferences } = useAuth();
   const [channels, setChannels] = useState<ChannelWithAccess[]>([]);
   const [selectedId, setSelectedId] = useState(channelId ?? '');
   const [conversation, setConversation] = useState<ConversationPayload | null>(null);
@@ -121,7 +121,7 @@ export function ChannelsPage() {
               <span className="conversation-header__count">{conversation.messages.length} mensagens</span>
             </header>
             <MessageList messages={conversation.messages} onDelete={(id) => void deleteMessage(id)} />
-            <MessageComposer channelName={conversation.channel.name} disabled={!conversation.channel.canPost} onSend={sendMessage} />
+            <MessageComposer sendOnEnter={preferences.sendOnEnter} channelName={conversation.channel.name} disabled={!conversation.channel.canPost} onSend={sendMessage} />
           </>}
         </section>
       </div>

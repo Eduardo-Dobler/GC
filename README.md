@@ -69,6 +69,23 @@ Para ver os novos exemplos, extraia o pacote em uma **pasta nova**. Se você cop
 
 Para demonstrar a hierarquia, entre como **Carlos Barbosa** e abra **Solicitações**: há um pedido de conversa feito por Pedro, um pedido para entrar no canal `equipe-senac-tech` e uma conversa já aceita com o histórico disponível. Aceite, recuse ou ignore os pedidos para mostrar as mudanças de estado; pedidos pendentes ou ignorados não podem ser reenviados até uma recusa.
 
+## Configurações pessoais e resposta automática
+
+Abra **Configurações** no menu lateral. Cada conta pode:
+
+- Ativar uma resposta automática e escrever seu próprio texto de até 500 caracteres.
+- Escolher o fuso horário que determina a virada do dia (padrão: Brasília/São Paulo).
+- Editar nome de exibição, descrição, status e cor do avatar.
+- Escolher Enter para enviar mensagens; Shift+Enter continua quebrando a linha. Sem essa opção, use o botão ou Ctrl+Enter (Cmd+Enter no macOS).
+- Usar a barra lateral compacta no computador. O botão ao lado da busca também recolhe ou expande o menu.
+- Alternar o tema claro/escuro, aplicado imediatamente e salvo neste navegador.
+
+A resposta automática é enviada somente na **primeira mensagem humana do dia recebida de cada pessoa em uma conversa individual já aceita**. O remetente vê a resposta imediatamente, identificada como “Resposta automática”. Funciona mesmo com o destinatário offline; não envia em grupos ou canais e não provoca ciclos entre contas com respostas ativadas. Se a pessoa já enviou uma mensagem naquele dia antes de você ativar a opção, a próxima resposta ocorrerá no dia seguinte.
+
+O histórico persistido em JSON controla o limite diário, inclusive após reiniciar a API, editar o texto ou desativar e reativar a opção. Cada remetente tem seu próprio limite. As configurações são privadas à conta e permanecem iguais ao trocar de comunidade; os bancos JSON anteriores continuam compatíveis. Restaurar demo também restaura as configurações e o histórico.
+
+No celular, o menu abre pelo botão no topo, tem rolagem própria e fecha ao escolher uma página, tocar fora ou pressionar Escape. Enquanto ele estiver aberto, a rolagem do conteúdo é bloqueada e o teclado permanece dentro do menu. A barra também permite alcançar todas as páginas em telas baixas ou na orientação horizontal.
+
 ## Comandos
 
 | Comando | Finalidade |
@@ -134,6 +151,7 @@ Todas as respostas bem-sucedidas usam `{ "data": ... }`; falhas usam `{ "error":
 | `GET/PATCH /api/requests` | Consultar e responder solicitações de conversa/canal (PATCH usa `/api/requests/:id`) |
 | `GET/POST /api/notes` | Listar e criar anotações pessoais |
 | `PATCH/DELETE /api/notes/:id` | Editar ou excluir uma anotação própria |
+| `GET/PATCH /api/settings` | Ler ou alterar o próprio perfil e preferências |
 | `GET /api/people` | Pessoas ativas para conversas e seleção de participantes |
 | `GET /api/dashboard` | Resumo da comunidade |
 | `GET /api/channels` | Canais visíveis para o usuário |

@@ -8,6 +8,7 @@ import { assertActiveMember, authenticatedUserId, requireAuth } from '../middlew
 import { ApiError, parseInput } from '../middleware/errors';
 import { toPublicUser } from '../services/public-user';
 import { selectedParticipants } from '../services/participants';
+import { automaticReply } from '../services/automatic-reply';
 
 function toThreadView(database: DemoDatabase, userId: string, thread: DirectThread): DirectThreadView {
   const participants = thread.participantIds.map((id) => {
@@ -18,7 +19,7 @@ function toThreadView(database: DemoDatabase, userId: string, thread: DirectThre
   const others = participants.filter((user) => user.id !== userId);
   const latestMessage = database.directMessages
     .filter((message) => message.threadId === thread.id)
-    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0] ?? null;
+    .sort((left, right) => left.createdAt.localeCompare(right.createdAt)).at(-1) ?? null;
   const isGroup = participants.length > 2;
   return {
     ...thread, participants, otherParticipant: others[0]!, latestMessage, isGroup,
@@ -89,18 +90,24 @@ export function directMessagesRouter(store: JsonStore, sessions: SessionStore): 
     const userId = authenticatedUserId(request);
     const input = parseInput(messageInput, request.body);
     const id = randomUUID();
-    const now = new Date().toISOString();
+    let automaticId: string | undefined;
     const database = await store.mutate((draft) => {
       assertActiveMember(draft, userId);
       const thread = draft.directThreads.find((candidate) => candidate.id === request.params.threadId);
       if (!thread) throw new ApiError(404, 'THREAD_NOT_FOUND', 'Conversa não encontrada.');
       if (!thread.participantIds.includes(userId)) throw new ApiError(403, 'FORBIDDEN', 'Você não participa desta conversa.');
+      const now = new Date().toISOString();
+      const reply = automaticReply(draft, thread, userId, now);
       draft.directMessages.push({ id, threadId: thread.id, authorId: userId, content: input.content, createdAt: now });
+      if (reply) { draft.directMessages.push(reply); automaticId = reply.id; }
       thread.updatedAt = now;
     });
     const message = database.directMessages.find((candidate) => candidate.id === id)!;
     const author = database.users.find((candidate) => candidate.id === userId)!;
-    response.status(201).json({ data: { ...message, author: toPublicUser(database, author) } });
+    const replies = database.directMessages.filter(item => item.id === automaticId).map(item => ({
+      ...item, author: toPublicUser(database, database.users.find(user => user.id === item.authorId)!),
+    }));
+    response.status(201).json({ data: { ...message, author: toPublicUser(database, author), automaticReplies: replies } });
   });
 
   return router;

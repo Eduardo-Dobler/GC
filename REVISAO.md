@@ -1,3 +1,20 @@
+# Configurações e respostas automáticas — versão JSON
+
+Esta revisão pertence exclusivamente ao repositório GC, com persistência JSON.
+
+- Nova página Configurações com mensagem automática por conta, fuso horário, perfil, status, avatar, tema, envio com Enter e barra lateral compacta.
+- Resposta automática na primeira mensagem humana de cada remetente no dia, somente em conversas individuais autorizadas. O histórico JSON mantém o controle após reiniciar, sem loops nem duplicatas em envios simultâneos.
+- Respostas identificadas na conversa e exibidas imediatamente para quem acabou de enviar a mensagem.
+- Menu lateral com rolagem independente, modo compacto no computador e painel móvel com foco controlado, Escape, bloqueio da rolagem de fundo e retorno de foco.
+- Configurações protegidas por autenticação, sem permitir alterações de cargo, e-mail ou dados de outras contas. Bancos anteriores continuam compatíveis; a reconstrução da release preserva o banco ativo.
+- Carregamento de conversas protegido contra respostas fora de ordem, com o editor disponível após carregar o histórico correto.
+
+Validação desta revisão: TypeScript, build de produção e **125 testes em 26 arquivos** aprovados. A release foi conferida no Chromium com duas contas, gravação real em JSON, resposta automática sem repetição e sete resoluções entre 320 e 1440 pixels, incluindo celular na horizontal. Não houve erros de execução nem requisições com falha nessa conferência.
+
+As demais revisões seguem abaixo.
+
+---
+
 # Atualização: solicitações e anotações
 
 - Conversas diretas obedecem à hierarquia da comunidade ativa: cargo superior recebe pedido, com aceite, recusa ou silêncio (ignorar). Não é possível reenviar enquanto o pedido está pendente/ignorado; a recusa libera uma nova tentativa.

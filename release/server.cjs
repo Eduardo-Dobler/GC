@@ -34185,11 +34185,11 @@ var require_router = __commonJS({
     var slice = Array.prototype.slice;
     var flatten = Array.prototype.flat;
     var methods = METHODS.map((method) => method.toLowerCase());
-    module2.exports = Router13;
+    module2.exports = Router14;
     module2.exports.Route = Route;
-    function Router13(options) {
-      if (!(this instanceof Router13)) {
-        return new Router13(options);
+    function Router14(options) {
+      if (!(this instanceof Router14)) {
+        return new Router14(options);
       }
       const opts = options || {};
       function router(req, res, next) {
@@ -34203,9 +34203,9 @@ var require_router = __commonJS({
       router.stack = [];
       return router;
     }
-    Router13.prototype = function() {
+    Router14.prototype = function() {
     };
-    Router13.prototype.param = function param(name, fn) {
+    Router14.prototype.param = function param(name, fn) {
       if (!name) {
         throw new TypeError("argument name is required");
       }
@@ -34225,7 +34225,7 @@ var require_router = __commonJS({
       params.push(fn);
       return this;
     };
-    Router13.prototype.handle = function handle(req, res, callback) {
+    Router14.prototype.handle = function handle(req, res, callback) {
       if (!callback) {
         throw new TypeError("argument callback is required");
       }
@@ -34352,7 +34352,7 @@ var require_router = __commonJS({
         }
       }
     };
-    Router13.prototype.use = function use(handler) {
+    Router14.prototype.use = function use(handler) {
       let offset = 0;
       let path = "/";
       if (typeof handler !== "function") {
@@ -34385,7 +34385,7 @@ var require_router = __commonJS({
       }
       return this;
     };
-    Router13.prototype.route = function route(path) {
+    Router14.prototype.route = function route(path) {
       const route2 = new Route(path);
       const layer = new Layer(path, {
         sensitive: this.caseSensitive,
@@ -34400,7 +34400,7 @@ var require_router = __commonJS({
       return route2;
     };
     methods.concat("all").forEach(function(method) {
-      Router13.prototype[method] = function(path) {
+      Router14.prototype[method] = function(path) {
         const route = this.route(path);
         route[method].apply(route, slice.call(arguments, 1));
         return this;
@@ -34583,7 +34583,7 @@ var require_application = __commonJS({
     var compileTrust = require_utils3().compileTrust;
     var resolve4 = require("node:path").resolve;
     var once = require_once();
-    var Router13 = require_router();
+    var Router14 = require_router();
     var slice = Array.prototype.slice;
     var flatten = Array.prototype.flat;
     var app = exports2 = module2.exports = {};
@@ -34599,7 +34599,7 @@ var require_application = __commonJS({
         enumerable: true,
         get: function getrouter() {
           if (router === null) {
-            router = new Router13({
+            router = new Router14({
               caseSensitive: this.enabled("case sensitive routing"),
               strict: this.enabled("strict routing")
             });
@@ -56331,7 +56331,7 @@ var require_express = __commonJS({
     var EventEmitter = require("node:events").EventEmitter;
     var mixin = require_merge_descriptors();
     var proto = require_application();
-    var Router13 = require_router();
+    var Router14 = require_router();
     var req = require_request();
     var res = require_response();
     exports2 = module2.exports = createApplication;
@@ -56353,8 +56353,8 @@ var require_express = __commonJS({
     exports2.application = proto;
     exports2.request = req;
     exports2.response = res;
-    exports2.Route = Router13.Route;
-    exports2.Router = Router13;
+    exports2.Route = Router14.Route;
+    exports2.Router = Router14;
     exports2.json = bodyParser.json;
     exports2.raw = bodyParser.raw;
     exports2.static = require_serve_static();
@@ -60537,9 +60537,55 @@ function normalizeGoogleMapsEmbedUrl(value) {
   return shareEmbed || legacyEmbed || apiEmbed ? url.href : null;
 }
 
+// packages/shared/src/settings.ts
+var AUTO_REPLY_TIME_ZONES = [
+  "America/Sao_Paulo",
+  "America/Manaus",
+  "America/Rio_Branco",
+  "America/Noronha",
+  "Europe/Lisbon",
+  "UTC"
+];
+var DEFAULT_USER_PREFERENCES = {
+  autoReply: {
+    enabled: false,
+    message: "Ol\xE1! Recebi sua mensagem e respondo assim que puder.",
+    timeZone: "America/Sao_Paulo"
+  },
+  sendOnEnter: false,
+  compactSidebar: false
+};
+
 // packages/shared/src/schemas.ts
 var isoDate = external_exports.string().datetime({ offset: true });
 var color = external_exports.string().regex(/^#[0-9a-fA-F]{6}$/, "Informe uma cor hexadecimal v\xE1lida.");
+var autoReplySchema = external_exports.object({
+  enabled: external_exports.boolean(),
+  message: external_exports.string().trim().max(500, "Use at\xE9 500 caracteres."),
+  timeZone: external_exports.enum(AUTO_REPLY_TIME_ZONES)
+}).strict();
+var userPreferencesSchema = external_exports.object({
+  autoReply: autoReplySchema.default(DEFAULT_USER_PREFERENCES.autoReply),
+  sendOnEnter: external_exports.boolean().default(false),
+  compactSidebar: external_exports.boolean().default(false)
+}).strict().superRefine((value, context) => {
+  if (value.autoReply.enabled && !value.autoReply.message.trim()) {
+    context.addIssue({ code: external_exports.ZodIssueCode.custom, path: ["autoReply", "message"], message: "Escreva a mensagem antes de ativar a resposta autom\xE1tica." });
+  }
+});
+var settingsUpdateInput = external_exports.object({
+  profile: external_exports.object({
+    name: external_exports.string().trim().min(3, "Informe pelo menos 3 caracteres.").max(60),
+    bio: external_exports.string().trim().max(500),
+    status: external_exports.enum(["online", "away", "offline"]),
+    avatarColor: color
+  }).partial().strict().optional(),
+  preferences: external_exports.object({
+    autoReply: autoReplySchema.partial().optional(),
+    sendOnEnter: external_exports.boolean().optional(),
+    compactSidebar: external_exports.boolean().optional()
+  }).strict().optional()
+}).strict();
 var permission = external_exports.enum(PERMISSIONS);
 var mapsUrl = external_exports.string().trim().max(4096).transform((value, context) => {
   const normalized = normalizeGoogleMapsUrl(value);
@@ -60616,7 +60662,8 @@ var baseDatabaseSchema = external_exports.object({
     threadId: external_exports.string(),
     authorId: external_exports.string(),
     content: external_exports.string(),
-    createdAt: isoDate
+    createdAt: isoDate,
+    isAutomatic: external_exports.boolean().optional()
   })),
   events: external_exports.array(external_exports.object({
     id: external_exports.string(),
@@ -60684,6 +60731,7 @@ var noteInput = external_exports.object({
 });
 var requestActionInput = external_exports.object({ action: external_exports.enum(["accept", "reject", "ignore"]) });
 var demoDatabaseSchema = baseDatabaseSchema.extend({
+  userSettings: external_exports.array(external_exports.object({ userId: external_exports.string().min(1), preferences: userPreferencesSchema })).default([]),
   accessPolicyVersion: external_exports.literal(1).optional(),
   notes: external_exports.array(noteInput.extend({ id: external_exports.string(), userId: external_exports.string(), createdAt: isoDate, updatedAt: isoDate })).default([]),
   accessRequests: external_exports.array(external_exports.object({
@@ -61108,13 +61156,59 @@ function notesRouter(store, sessions) {
   return router;
 }
 
+// apps/api/src/routes/settings.ts
+var import_express3 = __toESM(require_express2(), 1);
+
+// apps/api/src/services/user-settings.ts
+function userPreferences(database, userId) {
+  return structuredClone(database.userSettings?.find((item) => item.userId === userId)?.preferences ?? DEFAULT_USER_PREFERENCES);
+}
+function settingsView(database, userId) {
+  const user = database.users.find((item) => item.id === userId);
+  if (!user) throw new ApiError(401, "AUTH_REQUIRED", "Entre novamente para continuar.");
+  const { id, name, email, bio, status, avatarColor } = user;
+  return { profile: { id, name, email, bio, status, avatarColor }, preferences: userPreferences(database, userId) };
+}
+
+// apps/api/src/routes/settings.ts
+function settingsRouter(store, sessions) {
+  const router = (0, import_express3.Router)();
+  router.use("/settings", requireAuth(store, sessions, false));
+  router.get("/settings", (request, response) => {
+    response.json({ data: settingsView(store.snapshot(), authenticatedUserId(request)) });
+  });
+  router.patch("/settings", async (request, response) => {
+    const userId = authenticatedUserId(request);
+    const input = parseInput(settingsUpdateInput, request.body);
+    const database = await store.mutate((draft) => {
+      assertActiveMember(draft, userId);
+      const user = draft.users.find((candidate) => candidate.id === userId);
+      if (input.profile) Object.assign(user, input.profile);
+      if (input.preferences) {
+        const current = userPreferences(draft, userId);
+        const preferences = parseInput(userPreferencesSchema, {
+          ...current,
+          ...input.preferences,
+          autoReply: { ...current.autoReply, ...input.preferences.autoReply }
+        });
+        const settings = draft.userSettings ??= [];
+        const existing = settings.find((item) => item.userId === userId);
+        if (existing) existing.preferences = preferences;
+        else settings.push({ userId, preferences });
+      }
+    });
+    response.json({ data: settingsView(database, userId) });
+  });
+  return router;
+}
+
 // apps/api/src/app.ts
-var import_express13 = __toESM(require_express2(), 1);
+var import_express14 = __toESM(require_express2(), 1);
 var import_node_path = require("node:path");
 
 // apps/api/src/routes/auth.ts
 var import_node_crypto4 = require("node:crypto");
-var import_express3 = __toESM(require_express2(), 1);
+var import_express4 = __toESM(require_express2(), 1);
 
 // apps/api/src/auth/password.ts
 var import_node_crypto3 = require("node:crypto");
@@ -61143,13 +61237,14 @@ function sessionData(database, userId, communityId) {
   const activeUser = publicUserForCommunity(database, user, activeCommunity);
   return {
     user: activeUser,
+    preferences: userPreferences(database, userId),
     permissions: activeUser.role.permissions,
     activeCommunity: activeCommunity.community,
     communities: communitySummaries(database, userId).filter((entry) => entry.isMember)
   };
 }
 function authRouter(store, sessions) {
-  const router = (0, import_express3.Router)();
+  const router = (0, import_express4.Router)();
   router.post("/login", async (request, response) => {
     const input = parseInput(loginInput, request.body);
     const database = store.snapshot();
@@ -61231,7 +61326,7 @@ function addAccessRequest(database, values) {
 
 // apps/api/src/routes/channels.ts
 var import_node_crypto6 = require("node:crypto");
-var import_express4 = __toESM(require_express2(), 1);
+var import_express5 = __toESM(require_express2(), 1);
 
 // apps/api/src/services/channel-access.ts
 function canViewChannel(database, userId, channel) {
@@ -61269,7 +61364,7 @@ function messageView(database, userId, messageId) {
   };
 }
 function channelsRouter(store, sessions) {
-  const router = (0, import_express4.Router)();
+  const router = (0, import_express5.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/channels", (request, response) => {
     const userId = authenticatedUserId(request);
@@ -61356,8 +61451,27 @@ function channelsRouter(store, sessions) {
 }
 
 // apps/api/src/routes/direct-messages.ts
+var import_node_crypto8 = require("node:crypto");
+var import_express6 = __toESM(require_express2(), 1);
+
+// apps/api/src/services/automatic-reply.ts
 var import_node_crypto7 = require("node:crypto");
-var import_express5 = __toESM(require_express2(), 1);
+function automaticReply(database, thread, senderId, now) {
+  if (thread.participantIds.length !== 2) return;
+  const recipientId = thread.participantIds.find((id) => id !== senderId);
+  const recipient = database.users.find((user) => user.id === recipientId && user.memberStatus === "active");
+  if (!recipient) return;
+  const { autoReply } = userPreferences(database, recipient.id);
+  if (!autoReply.enabled || !autoReply.message.trim()) return;
+  const formatter = new Intl.DateTimeFormat("en-CA", { timeZone: autoReply.timeZone, year: "numeric", month: "2-digit", day: "2-digit" });
+  const today = formatter.format(new Date(now));
+  const conversations = new Set(database.directThreads.filter((item) => item.participantIds.length === 2 && item.participantIds.includes(senderId) && item.participantIds.includes(recipient.id)).map((item) => item.id));
+  const alreadyContacted = database.directMessages.some((message) => !message.isAutomatic && message.authorId === senderId && conversations.has(message.threadId) && formatter.format(new Date(message.createdAt)) === today);
+  if (alreadyContacted) return;
+  return { id: (0, import_node_crypto7.randomUUID)(), threadId: thread.id, authorId: recipient.id, content: autoReply.message, createdAt: now, isAutomatic: true };
+}
+
+// apps/api/src/routes/direct-messages.ts
 function toThreadView(database, userId, thread) {
   const participants = thread.participantIds.map((id) => {
     const user = database.users.find((candidate) => candidate.id === id);
@@ -61365,7 +61479,7 @@ function toThreadView(database, userId, thread) {
     return toPublicUser(database, user);
   });
   const others = participants.filter((user) => user.id !== userId);
-  const latestMessage = database.directMessages.filter((message) => message.threadId === thread.id).sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0] ?? null;
+  const latestMessage = database.directMessages.filter((message) => message.threadId === thread.id).sort((left, right) => left.createdAt.localeCompare(right.createdAt)).at(-1) ?? null;
   const isGroup = participants.length > 2;
   return {
     ...thread,
@@ -61377,7 +61491,7 @@ function toThreadView(database, userId, thread) {
   };
 }
 function directMessagesRouter(store, sessions) {
-  const router = (0, import_express5.Router)();
+  const router = (0, import_express6.Router)();
   router.use(requireAuth(store, sessions, false));
   router.get("/direct-threads", (request, response) => {
     const userId = authenticatedUserId(request);
@@ -61388,7 +61502,7 @@ function directMessagesRouter(store, sessions) {
   router.post("/direct-threads", async (request, response) => {
     const userId = authenticatedUserId(request);
     const input = parseInput(directThreadInput, request.body);
-    let id = (0, import_node_crypto7.randomUUID)();
+    let id = (0, import_node_crypto8.randomUUID)();
     let created = false;
     const requestIds = [];
     const database = await store.mutate((draft) => {
@@ -61433,26 +61547,36 @@ function directMessagesRouter(store, sessions) {
   router.post("/direct-threads/:threadId/messages", async (request, response) => {
     const userId = authenticatedUserId(request);
     const input = parseInput(messageInput, request.body);
-    const id = (0, import_node_crypto7.randomUUID)();
-    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const id = (0, import_node_crypto8.randomUUID)();
+    let automaticId;
     const database = await store.mutate((draft) => {
       assertActiveMember(draft, userId);
       const thread = draft.directThreads.find((candidate) => candidate.id === request.params.threadId);
       if (!thread) throw new ApiError(404, "THREAD_NOT_FOUND", "Conversa n\xE3o encontrada.");
       if (!thread.participantIds.includes(userId)) throw new ApiError(403, "FORBIDDEN", "Voc\xEA n\xE3o participa desta conversa.");
+      const now = (/* @__PURE__ */ new Date()).toISOString();
+      const reply = automaticReply(draft, thread, userId, now);
       draft.directMessages.push({ id, threadId: thread.id, authorId: userId, content: input.content, createdAt: now });
+      if (reply) {
+        draft.directMessages.push(reply);
+        automaticId = reply.id;
+      }
       thread.updatedAt = now;
     });
     const message = database.directMessages.find((candidate) => candidate.id === id);
     const author = database.users.find((candidate) => candidate.id === userId);
-    response.status(201).json({ data: { ...message, author: toPublicUser(database, author) } });
+    const replies = database.directMessages.filter((item) => item.id === automaticId).map((item) => ({
+      ...item,
+      author: toPublicUser(database, database.users.find((user) => user.id === item.authorId))
+    }));
+    response.status(201).json({ data: { ...message, author: toPublicUser(database, author), automaticReplies: replies } });
   });
   return router;
 }
 
 // apps/api/src/routes/events.ts
-var import_node_crypto8 = require("node:crypto");
-var import_express6 = __toESM(require_express2(), 1);
+var import_node_crypto9 = require("node:crypto");
+var import_express7 = __toESM(require_express2(), 1);
 function toEventView(database, userId, event) {
   const creator = database.users.find((candidate) => candidate.id === event.createdBy);
   if (!creator) throw new ApiError(500, "INVALID_DATA", "Criador do evento n\xE3o encontrado.");
@@ -61473,7 +61597,7 @@ function assertChronology(startsAt, endsAt) {
   }
 }
 function eventsRouter(store, sessions) {
-  const router = (0, import_express6.Router)();
+  const router = (0, import_express7.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/events", (request, response) => {
     const userId = authenticatedUserId(request);
@@ -61495,7 +61619,7 @@ function eventsRouter(store, sessions) {
     const userId = authenticatedUserId(request);
     const input = parseInput(eventInput, request.body);
     assertChronology(input.startsAt, input.endsAt);
-    const id = (0, import_node_crypto8.randomUUID)();
+    const id = (0, import_node_crypto9.randomUUID)();
     const now = (/* @__PURE__ */ new Date()).toISOString();
     const database = await store.mutate((draft) => {
       if (!hasPermission(draft, userId, "CREATE_EVENTS")) {
@@ -61555,7 +61679,7 @@ function eventsRouter(store, sessions) {
         existing.status = input.status;
         existing.updatedAt = now;
       } else {
-        draft.eventParticipants.push({ id: (0, import_node_crypto8.randomUUID)(), eventId: event.id, userId, status: input.status, updatedAt: now });
+        draft.eventParticipants.push({ id: (0, import_node_crypto9.randomUUID)(), eventId: event.id, userId, status: input.status, updatedAt: now });
       }
     });
     response.json({ data: toEventView(database, userId, database.events.find((candidate) => candidate.id === eventId)) });
@@ -61564,9 +61688,9 @@ function eventsRouter(store, sessions) {
 }
 
 // apps/api/src/routes/dashboard.ts
-var import_express7 = __toESM(require_express2(), 1);
+var import_express8 = __toESM(require_express2(), 1);
 function dashboardRouter(store, sessions) {
-  const router = (0, import_express7.Router)();
+  const router = (0, import_express8.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/dashboard", (request, response) => {
     const userId = authenticatedUserId(request);
@@ -61602,9 +61726,9 @@ function dashboardRouter(store, sessions) {
 }
 
 // apps/api/src/routes/demo.ts
-var import_express8 = __toESM(require_express2(), 1);
+var import_express9 = __toESM(require_express2(), 1);
 function demoRouter(store, sessions) {
-  const router = (0, import_express8.Router)();
+  const router = (0, import_express9.Router)();
   router.post("/demo/reset", requireAuth(store, sessions, false), async (request, response) => {
     parseInput(resetInput, request.body);
     await store.reset();
@@ -61615,8 +61739,8 @@ function demoRouter(store, sessions) {
 }
 
 // apps/api/src/routes/invites.ts
-var import_node_crypto9 = require("node:crypto");
-var import_express9 = __toESM(require_express2(), 1);
+var import_node_crypto10 = require("node:crypto");
+var import_express10 = __toESM(require_express2(), 1);
 var CODE_CHARACTERS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 function generateCode(existing) {
   for (let attempt = 0; attempt < 100; attempt += 1) {
@@ -61629,7 +61753,7 @@ function generateCode(existing) {
   throw new ApiError(500, "INVITE_CODE_FAILED", "N\xE3o foi poss\xEDvel gerar um c\xF3digo \xFAnico.");
 }
 function invitesRouter(store, sessions) {
-  const router = (0, import_express9.Router)();
+  const router = (0, import_express10.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/invites", (_request, response) => {
     const now = Date.now();
@@ -61642,7 +61766,7 @@ function invitesRouter(store, sessions) {
   router.post("/invites", async (request, response) => {
     const actorId = authenticatedUserId(request);
     const input = parseInput(inviteInput, request.body);
-    const id = (0, import_node_crypto9.randomUUID)();
+    const id = (0, import_node_crypto10.randomUUID)();
     const createdAt = /* @__PURE__ */ new Date();
     const expiresAt = new Date(createdAt.getTime() + input.expiresInDays * 864e5);
     const database = await store.mutate((draft) => {
@@ -61676,8 +61800,8 @@ function invitesRouter(store, sessions) {
 }
 
 // apps/api/src/routes/members.ts
-var import_node_crypto10 = require("node:crypto");
-var import_express10 = __toESM(require_express2(), 1);
+var import_node_crypto11 = require("node:crypto");
+var import_express11 = __toESM(require_express2(), 1);
 function toMemberView(database, actorId, member, communityId) {
   const community = findCommunity(database, communityId);
   return {
@@ -61689,7 +61813,7 @@ function toMemberView(database, actorId, member, communityId) {
   };
 }
 function membersRouter(store, sessions) {
-  const router = (0, import_express10.Router)();
+  const router = (0, import_express11.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/members", (request, response) => {
     const actorId = authenticatedUserId(request);
@@ -61721,7 +61845,7 @@ function membersRouter(store, sessions) {
       target.roleId = role.id;
       target.activity.unshift({ label: `Cargo alterado para ${role.name}`, date: now });
       draft.auditLogs.push({
-        id: (0, import_node_crypto10.randomUUID)(),
+        id: (0, import_node_crypto11.randomUUID)(),
         actorId,
         action: "MEMBER_ROLE_CHANGED",
         targetType: "user",
@@ -61745,7 +61869,7 @@ function membersRouter(store, sessions) {
       target.status = "offline";
       target.activity.unshift({ label: input.action === "ban" ? "Conta banida" : "Removido da comunidade", date: now });
       draft.auditLogs.push({
-        id: (0, import_node_crypto10.randomUUID)(),
+        id: (0, import_node_crypto11.randomUUID)(),
         actorId,
         action: input.action === "ban" ? "MEMBER_BANNED" : "MEMBER_REMOVED",
         targetType: "user",
@@ -61761,10 +61885,10 @@ function membersRouter(store, sessions) {
 }
 
 // apps/api/src/routes/roles.ts
-var import_node_crypto11 = require("node:crypto");
-var import_express11 = __toESM(require_express2(), 1);
+var import_node_crypto12 = require("node:crypto");
+var import_express12 = __toESM(require_express2(), 1);
 function rolesRouter(store, sessions) {
-  const router = (0, import_express11.Router)();
+  const router = (0, import_express12.Router)();
   router.use(requireAuth(store, sessions));
   router.get("/roles", (_request, response) => {
     response.json({ data: store.snapshot().roles.sort((left, right) => right.rank - left.rank) });
@@ -61772,7 +61896,7 @@ function rolesRouter(store, sessions) {
   router.post("/roles", async (request, response) => {
     const actorId = authenticatedUserId(request);
     const input = parseInput(roleInput, request.body);
-    const id = (0, import_node_crypto11.randomUUID)();
+    const id = (0, import_node_crypto12.randomUUID)();
     const database = await store.mutate((draft) => {
       if (!hasPermission(draft, actorId, "MANAGE_ROLES")) throw new ApiError(403, "FORBIDDEN", "Seu cargo n\xE3o permite criar cargos.");
       if (draft.roles.some((role) => role.name.toLowerCase() === input.name.toLowerCase())) {
@@ -61805,10 +61929,10 @@ function rolesRouter(store, sessions) {
 }
 
 // apps/api/src/routes/communities.ts
-var import_node_crypto12 = require("node:crypto");
-var import_express12 = __toESM(require_express2(), 1);
+var import_node_crypto13 = require("node:crypto");
+var import_express13 = __toESM(require_express2(), 1);
 function communitiesRouter(store, sessions) {
-  const router = (0, import_express12.Router)();
+  const router = (0, import_express13.Router)();
   router.get("/demo/accounts", (_request, response) => {
     response.json({ data: demoAccounts(store.snapshot()) });
   });
@@ -61831,7 +61955,7 @@ function communitiesRouter(store, sessions) {
   router.post("/communities", async (request, response) => {
     const userId = authenticatedUserId(request);
     const input = parseInput(communityInput, request.body);
-    const id = `community-${(0, import_node_crypto12.randomUUID)()}`;
+    const id = `community-${(0, import_node_crypto13.randomUUID)()}`;
     const now = (/* @__PURE__ */ new Date()).toISOString();
     const database = await store.mutate((draft) => {
       const members = Array.from(/* @__PURE__ */ new Set([userId, ...input.memberIds]));
@@ -61840,7 +61964,7 @@ function communitiesRouter(store, sessions) {
       const entry = { community: { id, name: input.name, description: input.description, createdAt: now }, category: input.category, accent: input.accent, createdBy: userId, memberIds: members };
       draft.communityDirectory = [...directory(draft), entry];
       draft.communitySpaces = [...draft.communitySpaces ?? [], emptySpace(draft, entry)];
-      draft.auditLogs.push({ id: (0, import_node_crypto12.randomUUID)(), actorId: userId, action: "COMMUNITY_CREATED", targetType: "community", targetId: id, details: `${input.name} criada.`, createdAt: now });
+      draft.auditLogs.push({ id: (0, import_node_crypto13.randomUUID)(), actorId: userId, action: "COMMUNITY_CREATED", targetType: "community", targetId: id, details: `${input.name} criada.`, createdAt: now });
     });
     const created = communitySummaries(database, userId).find((entry) => entry.community.id === id);
     response.status(201).json({ data: created });
@@ -61864,9 +61988,9 @@ function communitiesRouter(store, sessions) {
 
 // apps/api/src/app.ts
 function createApp({ store, sessions, staticDir }) {
-  const app = (0, import_express13.default)();
+  const app = (0, import_express14.default)();
   app.disable("x-powered-by");
-  app.use(import_express13.default.json({ limit: "100kb" }));
+  app.use(import_express14.default.json({ limit: "100kb" }));
   app.get("/api/health", (_request, response) => {
     response.json({ data: { status: "ok", mode: "offline", schemaVersion: 1 } });
   });
@@ -61874,6 +61998,7 @@ function createApp({ store, sessions, staticDir }) {
   app.use("/api", communitiesRouter(store, sessions));
   app.use("/api", requestsRouter(store, sessions));
   app.use("/api", notesRouter(store, sessions));
+  app.use("/api", settingsRouter(store, sessions));
   app.use("/api", directMessagesRouter(store, sessions));
   app.use("/api", demoRouter(store, sessions));
   app.use("/api", requireAuth(store, sessions), (request, _response, next) => store.withCommunity(request.communityId, next));
@@ -61885,7 +62010,7 @@ function createApp({ store, sessions, staticDir }) {
   app.use("/api", invitesRouter(store, sessions));
   app.use("/api", notFoundHandler);
   if (staticDir) {
-    app.use(import_express13.default.static(staticDir));
+    app.use(import_express14.default.static(staticDir));
     app.use((request, response, next) => {
       if (request.method !== "GET") {
         next();

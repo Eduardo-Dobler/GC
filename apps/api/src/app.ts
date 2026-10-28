@@ -1,5 +1,6 @@
 import { requestsRouter } from './routes/requests';
 import { notesRouter } from './routes/notes';
+import { settingsRouter } from './routes/settings';
 import { requireAuth } from './middleware/auth';
 import express, { type Express } from 'express';
 import { resolve } from 'node:path';
@@ -35,6 +36,7 @@ export function createApp({ store, sessions, staticDir }: CreateAppOptions): Exp
   app.use('/api', communitiesRouter(store, sessions));
   app.use('/api', requestsRouter(store, sessions));
   app.use('/api', notesRouter(store, sessions));
+  app.use('/api', settingsRouter(store, sessions));
   app.use('/api', directMessagesRouter(store, sessions));
   app.use('/api', demoRouter(store, sessions));
   app.use('/api', requireAuth(store, sessions), (request, _response, next) => store.withCommunity(request.communityId!, next));

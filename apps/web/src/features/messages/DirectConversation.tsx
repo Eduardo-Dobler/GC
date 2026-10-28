@@ -1,4 +1,5 @@
-import { Send } from 'lucide-react';
+import { submitOnEnter } from './submitOnEnter';
+import { Bot, Send } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import type { DirectMessage, DirectThreadView, PublicUser } from '@gc/shared';
 import { Avatar } from '../../components/Avatar';
@@ -7,18 +8,20 @@ export interface DirectMessageView extends DirectMessage {
   author: PublicUser;
 }
 
-export function DirectConversation({ thread, messages, onSend }: { thread: DirectThreadView; messages: DirectMessageView[]; onSend: (content: string) => Promise<void> }) {
+export function DirectConversation({ thread, messages, onSend, sendOnEnter = false }: { sendOnEnter?: boolean; thread: DirectThreadView; messages: DirectMessageView[]; onSend: (content: string) => Promise<void> }) {
   const [content, setContent] = useState('');
   const [sending, setSending] = useState(false);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
     const value = content.trim();
-    if (!value) return;
+    if (!value || sending) return;
     setSending(true);
     try {
       await onSend(value);
       setContent('');
+    } catch {
+      // A página mostra o erro; preserva o rascunho para tentar novamente.
     } finally {
       setSending(false);
     }
@@ -32,15 +35,15 @@ export function DirectConversation({ thread, messages, onSend }: { thread: Direc
       </header>
       <div className="direct-messages" aria-live="polite">
         {messages.map((message) => (
-          <article key={message.id} className="direct-message">
+          <article key={message.id} className={`direct-message ${message.isAutomatic ? 'direct-message--automatic' : ''}`}>
             <Avatar name={message.author.name} color={message.author.avatarColor ?? message.author.role.color} size="small" />
-            <div><header><strong>{message.author.name}</strong><time>{new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(new Date(message.createdAt))}</time></header><p>{message.content}</p></div>
+            <div><header><strong>{message.author.name}</strong><time>{new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(new Date(message.createdAt))}</time></header>{message.isAutomatic && <span className="automatic-message-label"><Bot size={12} /> Resposta automática</span>}<p>{message.content}</p></div>
           </article>
         ))}
       </div>
       <form className="direct-composer" onSubmit={submit}>
         <label className="sr-only" htmlFor="direct-message">Mensagem direta</label>
-        <textarea id="direct-message" rows={1} maxLength={500} value={content} onChange={(event) => setContent(event.target.value)} placeholder={`Mensagem para ${thread.title ?? thread.otherParticipant.name}`} disabled={sending} />
+        <textarea id="direct-message" onKeyDown={event => submitOnEnter(event, sendOnEnter)} rows={1} maxLength={500} value={content} onChange={(event) => setContent(event.target.value)} placeholder={`Mensagem para ${thread.title ?? thread.otherParticipant.name}`} disabled={sending} />
         <button type="submit" disabled={sending || !content.trim()} aria-label="Enviar mensagem"><Send size={18} /></button>
       </form>
     </section>

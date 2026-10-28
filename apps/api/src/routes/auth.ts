@@ -7,6 +7,7 @@ import type { JsonStore } from '../db/json-store';
 import { authenticatedUserId, requireAuth } from '../middleware/auth';
 import { ApiError, parseInput } from '../middleware/errors';
 import { communitySummaries, findCommunity, publicUserForCommunity, userCommunities } from '../services/communities';
+import { userPreferences } from '../services/user-settings';
 
 function sessionData(database: ReturnType<JsonStore['snapshot']>, userId: string, communityId?: string) {
   const user = database.users.find((candidate) => candidate.id === userId)!;
@@ -16,6 +17,7 @@ function sessionData(database: ReturnType<JsonStore['snapshot']>, userId: string
   const activeUser = publicUserForCommunity(database, user, activeCommunity);
   return {
     user: activeUser,
+    preferences: userPreferences(database, userId),
     permissions: activeUser.role.permissions,
     activeCommunity: activeCommunity.community,
     communities: communitySummaries(database, userId).filter((entry) => entry.isMember),

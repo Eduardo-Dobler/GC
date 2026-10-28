@@ -1,9 +1,39 @@
 import { z } from 'zod';
 import { PERMISSIONS } from './permissions';
 import { normalizeGoogleMapsEmbedUrl, normalizeGoogleMapsUrl } from './maps';
+import { AUTO_REPLY_TIME_ZONES, DEFAULT_USER_PREFERENCES } from './settings';
 
 const isoDate = z.string().datetime({ offset: true });
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Informe uma cor hexadecimal válida.');
+const autoReplySchema = z.object({
+  enabled: z.boolean(),
+  message: z.string().trim().max(500, 'Use até 500 caracteres.'),
+  timeZone: z.enum(AUTO_REPLY_TIME_ZONES),
+}).strict();
+
+export const userPreferencesSchema = z.object({
+  autoReply: autoReplySchema.default(DEFAULT_USER_PREFERENCES.autoReply),
+  sendOnEnter: z.boolean().default(false),
+  compactSidebar: z.boolean().default(false),
+}).strict().superRefine((value, context) => {
+  if (value.autoReply.enabled && !value.autoReply.message.trim()) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ['autoReply', 'message'], message: 'Escreva a mensagem antes de ativar a resposta automática.' });
+  }
+});
+
+export const settingsUpdateInput = z.object({
+  profile: z.object({
+    name: z.string().trim().min(3, 'Informe pelo menos 3 caracteres.').max(60),
+    bio: z.string().trim().max(500),
+    status: z.enum(['online', 'away', 'offline']),
+    avatarColor: color,
+  }).partial().strict().optional(),
+  preferences: z.object({
+    autoReply: autoReplySchema.partial().optional(),
+    sendOnEnter: z.boolean().optional(),
+    compactSidebar: z.boolean().optional(),
+  }).strict().optional(),
+}).strict();
 const permission = z.enum(PERMISSIONS as [typeof PERMISSIONS[number], ...typeof PERMISSIONS]);
 
 const mapsUrl = z.string().trim().max(4096).transform((value, context) => {
@@ -73,6 +103,7 @@ const baseDatabaseSchema = z.object({
   })),
   directMessages: z.array(z.object({
     id: z.string(), threadId: z.string(), authorId: z.string(), content: z.string(), createdAt: isoDate,
+    isAutomatic: z.boolean().optional(),
   })),
   events: z.array(z.object({
     id: z.string(),
@@ -128,6 +159,7 @@ export const noteInput = z.object({
 export const requestActionInput = z.object({ action: z.enum(['accept', 'reject', 'ignore']) });
 
 export const demoDatabaseSchema = baseDatabaseSchema.extend({
+  userSettings: z.array(z.object({ userId: z.string().min(1), preferences: userPreferencesSchema })).default([]),
   accessPolicyVersion: z.literal(1).optional(),
   notes: z.array(noteInput.extend({ id: z.string(), userId: z.string(), createdAt: isoDate, updatedAt: isoDate })).default([]),
   accessRequests: z.array(z.object({
