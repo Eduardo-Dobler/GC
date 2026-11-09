@@ -60559,6 +60559,8 @@ var DEFAULT_USER_PREFERENCES = {
 // packages/shared/src/schemas.ts
 var isoDate = external_exports.string().datetime({ offset: true });
 var color = external_exports.string().regex(/^#[0-9a-fA-F]{6}$/, "Informe uma cor hexadecimal v\xE1lida.");
+var avatarUrl = external_exports.string().max(18e4, "A foto ficou muito grande. Escolha outra imagem.").refine((value) => value === "" || /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(value), "Selecione uma foto JPG, PNG ou WebP.");
+var statusMessage = external_exports.string().trim().max(80, "Use at\xE9 80 caracteres no status.");
 var autoReplySchema = external_exports.object({
   enabled: external_exports.boolean(),
   message: external_exports.string().trim().max(500, "Use at\xE9 500 caracteres."),
@@ -60578,7 +60580,9 @@ var settingsUpdateInput = external_exports.object({
     name: external_exports.string().trim().min(3, "Informe pelo menos 3 caracteres.").max(60),
     bio: external_exports.string().trim().max(500),
     status: external_exports.enum(["online", "away", "offline"]),
-    avatarColor: color
+    avatarColor: color,
+    avatarUrl,
+    statusMessage
   }).partial().strict().optional(),
   preferences: external_exports.object({
     autoReply: autoReplySchema.partial().optional(),
@@ -60614,6 +60618,8 @@ var userSchema = external_exports.object({
   roleId: external_exports.string().min(1),
   bio: external_exports.string(),
   avatarColor: color.optional(),
+  avatarUrl: avatarUrl.optional(),
+  statusMessage: statusMessage.optional(),
   status: external_exports.enum(["online", "away", "offline"]),
   memberStatus: external_exports.enum(["active", "banned", "removed"]),
   joinedAt: isoDate,
@@ -61166,8 +61172,8 @@ function userPreferences(database, userId) {
 function settingsView(database, userId) {
   const user = database.users.find((item) => item.id === userId);
   if (!user) throw new ApiError(401, "AUTH_REQUIRED", "Entre novamente para continuar.");
-  const { id, name, email, bio, status, avatarColor } = user;
-  return { profile: { id, name, email, bio, status, avatarColor }, preferences: userPreferences(database, userId) };
+  const { id, name, email, bio, status, avatarColor, avatarUrl: avatarUrl2, statusMessage: statusMessage2 } = user;
+  return { profile: { id, name, email, bio, status, avatarColor, avatarUrl: avatarUrl2 ?? "", statusMessage: statusMessage2 ?? "" }, preferences: userPreferences(database, userId) };
 }
 
 // apps/api/src/routes/settings.ts
@@ -61990,6 +61996,7 @@ function communitiesRouter(store, sessions) {
 function createApp({ store, sessions, staticDir }) {
   const app = (0, import_express14.default)();
   app.disable("x-powered-by");
+  app.use("/api/settings", import_express14.default.json({ limit: "256kb" }));
   app.use(import_express14.default.json({ limit: "100kb" }));
   app.get("/api/health", (_request, response) => {
     response.json({ data: { status: "ok", mode: "offline", schemaVersion: 1 } });
