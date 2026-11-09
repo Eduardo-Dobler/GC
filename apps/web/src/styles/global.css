@@ -516,6 +516,7 @@ html[data-theme='dark'] .conversation-header__icon,
 html[data-theme='dark'] .conversation-empty__icon { color: #ff9a52; background: #252525; }
 html[data-theme='dark'] .permission-table thead th { background: #252525; }
 html[data-theme='dark'] .invite-link { background: #252525; }
+html[data-theme='dark'] .invite-card > header code { color: #f4f4f4; }
 html[data-theme='dark'] .toast { background: #252525; }
 
 @media (max-width: 1100px) {
