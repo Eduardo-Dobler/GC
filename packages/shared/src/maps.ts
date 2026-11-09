@@ -78,3 +78,35 @@ export function googleMapsOpenUrl(value: string, fallbackDescription = ''): stri
   const description = fallbackDescription.trim();
   return description ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(description)}` : null;
 }
+
+export interface MapPoint { lat: number; lng: number }
+
+export function validMapPoint(value: unknown): value is MapPoint {
+  if (!value || typeof value !== 'object') return false;
+  const point = value as MapPoint;
+  return typeof point.lat === 'number' && typeof point.lng === 'number'
+    && Number.isFinite(point.lat) && Number.isFinite(point.lng)
+    && Math.abs(point.lat) <= 90 && Math.abs(point.lng) <= 180;
+}
+
+/** Restore a saved pin from GC-generated URLs or a Google Maps coordinate URL. */
+export function mapPointFromUrl(value: string): MapPoint | null {
+  const normalized = normalizeGoogleMapsUrl(value) || normalizeGoogleMapsEmbedUrl(value);
+  if (!normalized) return null;
+  const url = new URL(normalized);
+  const query = url.searchParams.get('query') ?? url.searchParams.get('q') ?? url.searchParams.get('center');
+  const match = query?.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/)
+    ?? url.pathname.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+  if (!match) return null;
+  const point = { lat: Number(match[1]), lng: Number(match[2]) };
+  return validMapPoint(point) ? point : null;
+}
+
+export function mapPointLinks(point: MapPoint): { googleMapsUrl: string; googleMapsEmbedUrl: string } {
+  if (!validMapPoint(point)) throw new Error('Coordenadas inválidas.');
+  const query = encodeURIComponent(`${point.lat.toFixed(6)},${point.lng.toFixed(6)}`);
+  return {
+    googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${query}`,
+    googleMapsEmbedUrl: `https://www.google.com/maps?q=${query}&output=embed`,
+  };
+}

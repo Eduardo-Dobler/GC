@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selecionar localização</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font: 14px system-ui, sans-serif; color: #181818; background: #eee; }
+    body { display: flex; flex-direction: column; }
+    #map { flex: 1; min-height: 160px; background: #e4e4e4; }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px; background: #fff; }
+    button { border: 1px solid #777; border-radius: 7px; background: #fff; color: #181818; padding: 7px 10px; font: inherit; cursor: pointer; }
+    button:focus-visible, #map:focus-visible { outline: 3px solid #ff6a00; outline-offset: -3px; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    #notice { padding: 6px 10px; margin: 0; background: #fff; font-size: 12px; }
+    .gc-pin { display: block; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #fff; background: #ff6a00; box-shadow: 0 1px 5px #333; }
+  </style>
+</head>
+<body>
+  <div id="map" aria-label="Mapa interativo. Use as setas para mover e mais ou menos para zoom."></div>
+  <div class="toolbar">
+    <button id="center" type="button" disabled>Marcar centro do mapa</button>
+    <button id="locate" type="button" disabled>Minha localização</button>
+  </div>
+  <p id="notice" role="status">Carregando mapa…</p>
+  <script>
+    function send(type, point) { parent.postMessage({ type, point }, location.origin); }
+    function failMap() {
+      document.getElementById('notice').textContent = 'Mapa indisponível. Verifique a internet ou use o link do Google Maps no formulário.';
+      send('gc-map-error');
+    }
+    const loadTimeout = setTimeout(failMap, 15000);
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous" onerror="clearTimeout(loadTimeout); failMap()"></script>
+  <script>
+    clearTimeout(loadTimeout);
+    if (!window.L) {
+      failMap();
+    } else {
+      const notice = document.getElementById('notice');
+      const match = location.hash.slice(1).match(/^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/);
+      const initial = match && Math.abs(Number(match[1])) <= 90 && Math.abs(Number(match[2])) <= 180
+        ? [Number(match[1]), Number(match[2])] : null;
+      const map = L.map('map', { scrollWheelZoom: false, worldCopyJump: true }).setView(initial || [-29.1681, -51.1794], initial ? 16 : 12);
+      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      tiles.on('tileerror', failMap);
+      let marker;
+      const icon = L.divIcon({ className: '', html: '<span class="gc-pin"></span>', iconSize: [24, 24], iconAnchor: [12, 12] });
+      function select(latlng) {
+        const point = latlng.wrap();
+        if (!Number.isFinite(point.lat) || Math.abs(point.lat) > 90) return;
+        if (!marker) {
+          marker = L.marker(point, { icon, draggable: true, title: 'Local selecionado. Arraste para ajustar.' }).addTo(map);
+          marker.on('dragend', () => select(marker.getLatLng()));
+        } else marker.setLatLng(point);
+        notice.textContent = 'Ponto: ' + point.lat.toFixed(6) + ', ' + point.lng.toFixed(6) + '. Confirme em “Usar este local”.';
+        send('gc-map-select', { lat: point.lat, lng: point.lng });
+      }
+      map.on('click', event => select(event.latlng));
+      document.getElementById('center').disabled = false;
+      document.getElementById('center').onclick = () => select(map.getCenter());
+      const locate = document.getElementById('locate');
+      locate.disabled = !navigator.geolocation;
+      locate.onclick = () => {
+        locate.disabled = true;
+        notice.textContent = 'Obtendo sua localização…';
+        navigator.geolocation.getCurrentPosition(position => {
+          locate.disabled = false;
+          const point = L.latLng(position.coords.latitude, position.coords.longitude);
+          map.setView(point, 16); select(point);
+        }, () => {
+          locate.disabled = false;
+          notice.textContent = 'Não foi possível obter sua localização. Escolha o ponto manualmente no mapa.';
+        }, { timeout: 10000, maximumAge: 60000 });
+      };
+      notice.textContent = 'Clique no ponto desejado ou mova com as setas e marque o centro.';
+      if (initial) select(L.latLng(initial));
+    }
+  </script>
+</body>
+</html>

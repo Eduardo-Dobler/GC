@@ -10,13 +10,14 @@ export function MemberCard({ member, onOpen }: { member: MemberView; onOpen: () 
   return (
     <article className="member-card">
       <header>
-        <Avatar name={member.name} color={member.avatarColor ?? member.role.color} size="large" status={member.status} />
+        <Avatar name={member.name} src={member.avatarUrl} statusMessage={member.statusMessage} color={member.avatarColor ?? member.role.color} size="large" status={member.status} />
         <div>
           <h2>{member.name}</h2>
           <span className="role-label" style={{ color: member.role.color }}><i style={{ backgroundColor: member.role.color }} />{member.role.name}</span>
         </div>
         <Badge tone={statusTone}>{member.memberStatus === 'banned' ? 'Banido' : STATUS_LABELS[member.status]}</Badge>
       </header>
+      {member.statusMessage && <p className="custom-status">{member.statusMessage}</p>}
       <p>{member.bio || 'Membro da Comunidade SENAC Tech.'}</p>
       <span className="member-card__email"><Mail size={14} /> {member.email}</span>
       <footer>

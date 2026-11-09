@@ -4,6 +4,7 @@ import type { EventView } from '@gc/shared';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/Modal';
 import { MapEmbedPreview } from './MapEmbedPreview';
+import { MapLocationPicker } from '../../components/MapLocationPicker';
 
 export interface EventFormValues {
   title: string;
@@ -77,6 +78,7 @@ export function EventForm({ open, event, onClose, onSave }: { open: boolean; eve
         <fieldset className="location-fieldset"><legend>Local do evento</legend>
           <label className="form-field">Descrição do local<textarea name="locationDescription" rows={2} maxLength={1000} defaultValue={event?.locationDescription ?? ''} placeholder="Ex.: Auditório do SENAC, entrada pela rua lateral." /></label>
           <label className="form-field">Buscar local no Maps<div className="map-search-row"><input value={placeSearch} onChange={(input) => setPlaceSearch(input.target.value)} placeholder="Ex.: SENAC Caxias do Sul" /><Button type="button" variant="secondary" onClick={() => { const place = placeSearch.trim(); if (!place) return; setMapsUrl(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`); setMapsEmbed(`https://www.google.com/maps?q=${encodeURIComponent(place)}&output=embed`); }}><Search size={16} /> Usar local</Button></div></label>
+          <MapLocationPicker value={mapsUrl || mapsEmbed} onSelect={location => { setMapsUrl(location.googleMapsUrl); setMapsEmbed(location.googleMapsEmbedUrl); }} />
           <label className="form-field">Link do Google Maps<input name="googleMapsUrl" type="url" value={mapsUrl} onChange={(input) => setMapsUrl(input.target.value)} placeholder="https://maps.app.goo.gl/..." /></label>
           <label className="form-field">Iframe do Google Maps<textarea name="googleMapsEmbedUrl" rows={3} value={mapsEmbed} onChange={(input) => setMapsEmbed(input.target.value)} placeholder="Cole o HTML copiado em Compartilhar > Incorporar um mapa" /><small className="helper-text">O sistema extrai somente o endereço seguro do mapa.</small></label>
           <details className="map-help"><summary>Modelo da Maps Embed API</summary><code>&lt;iframe width="450" height="250" frameborder="0" style="border:0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&amp;q=SENAC+Caxias+do+Sul" allowfullscreen&gt;&lt;/iframe&gt;</code><small className="helper-text">Troque `YOUR_API_KEY` por uma chave real antes de salvar. Para uma demonstração rápida, use o botão “Usar local” ou copie o iframe em Compartilhar → Incorporar um mapa.</small></details>

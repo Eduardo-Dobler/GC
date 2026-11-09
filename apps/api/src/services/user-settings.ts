@@ -8,6 +8,6 @@ export function userPreferences(database: DemoDatabase, userId: string): UserPre
 export function settingsView(database: DemoDatabase, userId: string): SettingsView {
   const user = database.users.find(item => item.id === userId);
   if (!user) throw new ApiError(401, 'AUTH_REQUIRED', 'Entre novamente para continuar.');
-  const { id, name, email, bio, status, avatarColor } = user;
-  return { profile: { id, name, email, bio, status, avatarColor }, preferences: userPreferences(database, userId) };
+  const { id, name, email, bio, status, avatarColor, avatarUrl, statusMessage } = user;
+  return { profile: { id, name, email, bio, status, avatarColor, avatarUrl: avatarUrl ?? '', statusMessage: statusMessage ?? '' }, preferences: userPreferences(database, userId) };
 }

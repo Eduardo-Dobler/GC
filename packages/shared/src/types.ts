@@ -64,6 +64,8 @@ export interface User {
   roleId: string;
   bio: string;
   avatarColor?: string;
+  avatarUrl?: string;
+  statusMessage?: string;
   status: 'online' | 'away' | 'offline';
   memberStatus: 'active' | 'banned' | 'removed';
   joinedAt: string;
@@ -128,12 +130,12 @@ export interface UserSettings {
 }
 
 export interface SettingsView {
-  profile: Pick<User, 'id' | 'name' | 'email' | 'bio' | 'status' | 'avatarColor'>;
+  profile: Pick<User, 'id' | 'name' | 'email' | 'bio' | 'status' | 'avatarColor' | 'avatarUrl' | 'statusMessage'>;
   preferences: UserPreferences;
 }
 
 export interface SettingsUpdate {
-  profile?: Partial<Pick<User, 'name' | 'bio' | 'status' | 'avatarColor'>>;
+  profile?: Partial<Pick<User, 'name' | 'bio' | 'status' | 'avatarColor' | 'avatarUrl' | 'statusMessage'>>;
   preferences?: Partial<Omit<UserPreferences, 'autoReply'>> & { autoReply?: Partial<UserPreferences['autoReply']> };
 }
 

@@ -10,7 +10,7 @@ export function MemberPicker({ members, selected, onChange, exclude = [] }: { me
   }, [exclude, members, query]);
   return <div className="member-picker">
     <input aria-label="Buscar pessoas" placeholder="Buscar por nome, e-mail ou cargo" value={query} onChange={(event) => setQuery(event.target.value)} />
-    <div className="member-picker__list">{visible.map((member) => <label key={member.id} className="member-picker__item"><input type="checkbox" checked={selected.includes(member.id)} onChange={() => onChange(selected.includes(member.id) ? selected.filter((id) => id !== member.id) : [...selected, member.id])} /><Avatar name={member.name} color={member.avatarColor ?? member.role.color} size="small" /><span><strong>{member.name}</strong><small>{member.role.name} · {member.email}</small></span></label>)}</div>
+    <div className="member-picker__list">{visible.map((member) => <label key={member.id} className="member-picker__item"><input type="checkbox" checked={selected.includes(member.id)} onChange={() => onChange(selected.includes(member.id) ? selected.filter((id) => id !== member.id) : [...selected, member.id])} /><Avatar name={member.name} src={member.avatarUrl} statusMessage={member.statusMessage} color={member.avatarColor ?? member.role.color} size="small" /><span><strong>{member.name}</strong><small>{member.role.name} · {member.email}</small></span></label>)}</div>
     {!visible.length && <p className="helper-text">Nenhuma pessoa encontrada.</p>}
   </div>;
 }

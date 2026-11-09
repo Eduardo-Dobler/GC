@@ -30,13 +30,13 @@ export function DirectConversation({ thread, messages, onSend, sendOnEnter = fal
   return (
     <section className="direct-conversation">
       <header className="direct-conversation__header">
-        <Avatar name={thread.title ?? thread.otherParticipant.name} color={thread.otherParticipant.avatarColor ?? thread.otherParticipant.role.color} status={thread.isGroup ? undefined : thread.otherParticipant.status} />
-        <div><h2>{thread.title ?? thread.otherParticipant.name}</h2><p>{thread.isGroup ? `${thread.participantIds.length} participantes` : `${thread.otherParticipant.role.name} · ${thread.otherParticipant.status === 'online' ? 'Online' : thread.otherParticipant.status === 'away' ? 'Ausente' : 'Offline'}`}</p></div>
+        <Avatar name={thread.title ?? thread.otherParticipant.name} src={thread.isGroup ? undefined : thread.otherParticipant.avatarUrl} statusMessage={thread.isGroup ? undefined : thread.otherParticipant.statusMessage} color={thread.otherParticipant.avatarColor ?? thread.otherParticipant.role.color} status={thread.isGroup ? undefined : thread.otherParticipant.status} />
+        <div><h2>{thread.title ?? thread.otherParticipant.name}</h2><p>{thread.isGroup ? `${thread.participantIds.length} participantes` : `${thread.otherParticipant.role.name} · ${thread.otherParticipant.status === 'online' ? 'Online' : thread.otherParticipant.status === 'away' ? 'Ausente' : 'Offline'}`}</p>{!thread.isGroup && thread.otherParticipant.statusMessage && <p className="custom-status">{thread.otherParticipant.statusMessage}</p>}</div>
       </header>
       <div className="direct-messages" aria-live="polite">
         {messages.map((message) => (
           <article key={message.id} className={`direct-message ${message.isAutomatic ? 'direct-message--automatic' : ''}`}>
-            <Avatar name={message.author.name} color={message.author.avatarColor ?? message.author.role.color} size="small" />
+            <Avatar name={message.author.name} src={message.author.avatarUrl} statusMessage={message.author.statusMessage} color={message.author.avatarColor ?? message.author.role.color} size="small" />
             <div><header><strong>{message.author.name}</strong><time>{new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(new Date(message.createdAt))}</time></header>{message.isAutomatic && <span className="automatic-message-label"><Bot size={12} /> Resposta automática</span>}<p>{message.content}</p></div>
           </article>
         ))}

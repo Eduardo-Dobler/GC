@@ -215,3 +215,13 @@ $env:PORT=3100; npm run start:release
 **Dados alterados durante ensaios:** use “Restaurar demo” na barra superior e digite exatamente `RESTAURAR`.
 
 **Dependências de desenvolvimento inconsistentes:** remova apenas `node_modules` e execute novamente `npm install`; a release compilada continua independente dessas dependências.
+
+### Foto de perfil, status e seleção de local
+
+Em **Configurações → Meu perfil**, adicione/troque/remova sua foto e escreva um status personalizado de até 80 caracteres. Clique em **Salvar configurações**. O status Online/Ausente/Offline continua disponível. A foto é recortada ao centro e reduzida no navegador antes de ser salva no JSON; são aceitos JPG, PNG e WebP de até 10 MB. Não é preciso criar pastas de upload.
+
+Nos formulários de **Eventos** e **Anotações → Tabela e localização**, use **Selecionar no Maps**, navegue pelo mapa, clique/toque no ponto desejado e confirme em **Usar este local**. Depois salve o evento ou a anotação. É possível arrastar o marcador, marcar o centro com o teclado ou usar sua localização com permissão do navegador. Cancelar mantém o link anterior.
+
+O seletor usa Leaflet 1.9.4 e OpenStreetMap, com atribuição visível, e necessita de internet. Os links gerados abrem as coordenadas exatas no Google Maps. A busca por nome, os links e o iframe existentes continuam disponíveis. Sem internet, fotos, status e as demais funções locais continuam funcionando.
+
+O workflow `.github/workflows/validate-release.yml` executa os tipos, a compilação e os testes; somente depois atualiza os arquivos de `release/`. A inicialização continua com `npm run start:release`.

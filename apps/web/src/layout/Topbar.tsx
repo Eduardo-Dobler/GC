@@ -25,8 +25,8 @@ export function Topbar({ onMenu, menuOpen, compact, onToggleCompact, savingSideb
         <button className="topbar__reset" onClick={onReset} disabled={!onReset}><RotateCcw size={16} /><span>Restaurar demo</span></button>
         {user && (
           <div className="user-menu">
-            <Avatar name={user.name} color={user.avatarColor ?? user.role.color} size="small" status={user.status} />
-            <div className="user-menu__text"><strong>{user.name}</strong><span>{user.role.name}</span></div>
+            <Avatar name={user.name} src={user.avatarUrl} statusMessage={user.statusMessage} color={user.avatarColor ?? user.role.color} size="small" status={user.status} />
+            <div className="user-menu__text"><strong>{user.name}</strong><span title={user.statusMessage || user.role.name}>{user.statusMessage || user.role.name}</span></div>
             <button className="icon-button" onClick={() => void logout()} aria-label="Sair"><LogOut size={18} /></button>
           </div>
         )}

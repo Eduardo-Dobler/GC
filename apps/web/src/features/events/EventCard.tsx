@@ -33,7 +33,7 @@ export function EventCard({ event, canEdit, onAttendance, onEdit, onDelete }: Ev
         </div>
         {(event.locationDescription || event.googleMapsUrl || event.googleMapsEmbedUrl) && <div className="event-card__location"><strong><MapPin size={15} /> Local</strong>{event.locationDescription && <p>{event.locationDescription}</p>}{mapUrl && <a className="event-card__map-link" href={mapUrl} target="_blank" rel="noreferrer">Abrir no Google Maps</a>}{mapSrc && <MapEmbedPreview src={mapSrc} title={`Mapa de ${event.title}`} />}</div>}
         <footer>
-          <div className="event-card__creator"><Avatar name={event.creator.name} color={event.creator.avatarColor ?? event.creator.role.color} size="small" /><span><small>Organizado por</small><strong>{event.creator.name}</strong></span></div>
+          <div className="event-card__creator"><Avatar name={event.creator.name} src={event.creator.avatarUrl} statusMessage={event.creator.statusMessage} color={event.creator.avatarColor ?? event.creator.role.color} size="small" /><span><small>Organizado por</small><strong>{event.creator.name}</strong></span></div>
           <div className="event-card__attendance"><span><Users size={15} /> {event.attendance.going} confirmados</span><Button size="small" variant={event.attendance.current === 'going' ? 'secondary' : 'primary'} onClick={() => onAttendance(event, event.attendance.current === 'going' ? 'not_going' : 'going')}><UserRoundCheck size={16} /> {event.attendance.current === 'going' ? 'Cancelar presença' : 'Confirmar presença'}</Button></div>
         </footer>
       </div>

@@ -65,14 +65,14 @@ export function DashboardPage() {
         <section className="surface">
           <header className="surface__header"><div><h2>Membros ativos</h2><p>Quem está disponível agora.</p></div><Link to="/membros">Ver membros</Link></header>
           <div className="surface__content online-list">
-            {data.onlineMembers.map((member) => <div className="online-member" key={member.id}><Avatar name={member.name} color={member.avatarColor ?? member.role.color} status={member.status} /><span><strong>{member.name}</strong><small style={{ color: member.role.color }}>{member.role.name}</small></span></div>)}
+            {data.onlineMembers.map((member) => <div className="online-member" key={member.id}><Avatar name={member.name} src={member.avatarUrl} statusMessage={member.statusMessage} color={member.avatarColor ?? member.role.color} status={member.status} /><span><strong>{member.name}</strong><small style={{ color: member.role.color }}>{member.role.name}</small></span></div>)}
           </div>
         </section>
 
         <section className="surface dashboard-grid__announcements">
           <header className="surface__header"><div><h2>Avisos recentes</h2><p>Últimas atualizações oficiais.</p></div><Link to="/canais">Abrir canal</Link></header>
           <div className="surface__content announcement-list">
-            {data.announcements.map((announcement) => <article key={announcement.id}><Avatar name={announcement.author.name} color={announcement.author.avatarColor ?? announcement.author.role.color} size="small" /><div><p>{announcement.content}</p><small>{announcement.author.name} · {new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(announcement.createdAt))}</small></div></article>)}
+            {data.announcements.map((announcement) => <article key={announcement.id}><Avatar name={announcement.author.name} src={announcement.author.avatarUrl} statusMessage={announcement.author.statusMessage} color={announcement.author.avatarColor ?? announcement.author.role.color} size="small" /><div><p>{announcement.content}</p><small>{announcement.author.name} · {new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(announcement.createdAt))}</small></div></article>)}
           </div>
         </section>
 

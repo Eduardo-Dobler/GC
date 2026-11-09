@@ -808,3 +808,20 @@ html[data-theme='dark'] .message-composer textarea { background: #222; color: #f
   .settings-option { padding: .85rem; }
   .settings-profile-options { grid-template-columns: minmax(0, 1fr) 100px; }
 }
+
+/* Perfil e seleção manual de localização */
+.avatar__photo { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+.custom-status { overflow-wrap: anywhere; white-space: pre-wrap; }
+.user-menu__text > span { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.profile-photo-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.profile-photo-controls .helper-text { flex-basis: 100%; margin: 0; }
+.map-picker { min-width: 0; }
+.map-picker__panel { padding: 14px 0 0; }
+.map-picker__panel > p { font-size: .86rem; }
+.map-picker__frame { display: block; width: 100%; height: 370px; border: 1px solid #888; border-radius: 12px; background: #e4e4e4; }
+.map-picker__actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; margin: 12px 0; }
+html[data-theme='dark'] .custom-status { color: #e0e0e0; }
+@media (max-width: 600px) {
+  .map-picker__frame { height: 320px; }
+  .map-picker__actions > button { flex: 1 1 130px; }
+}

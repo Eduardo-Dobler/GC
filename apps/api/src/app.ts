@@ -27,6 +27,7 @@ export interface CreateAppOptions {
 export function createApp({ store, sessions, staticDir }: CreateAppOptions): Express {
   const app = express();
   app.disable('x-powered-by');
+  app.use('/api/settings', express.json({ limit: '256kb' }));
   app.use(express.json({ limit: '100kb' }));
 
   app.get('/api/health', (_request, response) => {

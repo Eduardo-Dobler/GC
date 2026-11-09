@@ -8,7 +8,7 @@ export function MessageList({ messages, onDelete }: { messages: MessageView[]; o
     <div className="message-list" aria-live="polite">
       {messages.map((message) => (
         <article key={message.id} className={`message ${message.deletedAt ? 'message--deleted' : ''}`}>
-          <Avatar name={message.author.name} color={message.author.avatarColor ?? message.author.role.color} size="medium" status={message.author.status} />
+          <Avatar name={message.author.name} src={message.author.avatarUrl} statusMessage={message.author.statusMessage} color={message.author.avatarColor ?? message.author.role.color} size="medium" status={message.author.status} />
           <div className="message__body">
             <header><strong>{message.author.name}</strong><span style={{ color: message.author.role.color }}>{message.author.role.name}</span><time>{new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' }).format(new Date(message.createdAt))}</time></header>
             <p>{message.content}</p>

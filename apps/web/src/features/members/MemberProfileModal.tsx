@@ -57,11 +57,12 @@ export function MemberProfileModal({ member, roles, onClose, onUpdate }: MemberP
     <Modal open title={`Perfil de ${member.name}`} onClose={onClose} wide>
       <div className="member-profile">
         <header className="member-profile__identity">
-          <Avatar name={member.name} color={member.avatarColor ?? member.role.color} size="large" status={member.status} />
+          <Avatar name={member.name} src={member.avatarUrl} statusMessage={member.statusMessage} color={member.avatarColor ?? member.role.color} size="large" status={member.status} />
           <div><h3>{member.name}</h3><span style={{ color: member.role.color }}>{member.role.name}</span></div>
           {member.memberStatus === 'banned' && <Badge tone="danger">Conta banida</Badge>}
         </header>
 
+        {member.statusMessage && <p className="custom-status">{member.statusMessage}</p>}
         <p className="member-profile__bio">{member.bio || 'Sem biografia cadastrada.'}</p>
         <div className="member-profile__facts">
           <span><Mail size={15} /> {member.email}</span>

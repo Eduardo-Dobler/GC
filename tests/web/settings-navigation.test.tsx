@@ -36,12 +36,13 @@ it('salva mensagem automática personalizada, perfil e preferências pela págin
   await userEvent.clear(message); await userEvent.type(message, 'Estou na aula. Respondo no intervalo!');
   const name = screen.getByLabelText('Nome de exibição');
   await userEvent.clear(name); await userEvent.type(name, 'Pedro da turma');
+  await userEvent.type(screen.getByLabelText('Status personalizado'), 'Em aula 📚');
   await userEvent.selectOptions(screen.getByLabelText('Status'), 'away');
   await userEvent.click(screen.getByRole('checkbox', { name: /Enviar mensagens com Enter/ }));
   await userEvent.click(screen.getByRole('button', { name: 'Salvar configurações' }));
   expect(await screen.findByText('Configurações salvas.')).toBeInTheDocument();
   const save = fetchMock.mock.calls.find(([url, init]) => url === '/api/settings' && init?.method === 'PATCH')!;
-  expect(JSON.parse(String(save[1]!.body))).toMatchObject({ profile: { name: 'Pedro da turma', status: 'away' }, preferences: { autoReply: { enabled: true, message: 'Estou na aula. Respondo no intervalo!' }, sendOnEnter: true } });
+  expect(JSON.parse(String(save[1]!.body))).toMatchObject({ profile: { name: 'Pedro da turma', status: 'away', statusMessage: 'Em aula 📚' }, preferences: { autoReply: { enabled: true, message: 'Estou na aula. Respondo no intervalo!' }, sendOnEnter: true } });
   expect(state.preferences.sendOnEnter).toBe(true);
   expect(screen.getByLabelText('Nome de exibição')).toHaveValue('Pedro da turma');
 });
