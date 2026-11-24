@@ -10,8 +10,8 @@ interface ModalProps {
   wide?: boolean;
 }
 
+// Começo parte feita a MÃO
 export function Modal({ open, title, children, onClose, footer, wide = false }: ModalProps) {
-  // Começo parte feita a MÃO
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -22,7 +22,6 @@ export function Modal({ open, title, children, onClose, footer, wide = false }: 
   }, [open, onClose]);
 
   if (!open) return null;
-  // Fim da parte feita a MÃO
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <section className={`modal ${wide ? 'modal--wide' : ''}`} role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -36,3 +35,4 @@ export function Modal({ open, title, children, onClose, footer, wide = false }: 
     </div>
   );
 }
+// Fim da parte feita a MÃO

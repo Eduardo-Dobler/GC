@@ -1,3 +1,4 @@
+// Começo parte feita a MÃO
 import { describe, expect, it } from 'vitest';
 import { canManageEvent, canModerateMember, hasPermission } from '@gc/shared';
 import { databaseFixture } from '../fixtures/database-fixture';
@@ -9,6 +10,7 @@ describe('regras de permissão', () => {
     expect(canModerateMember(db, 'user-moderator', 'user-organizer')).toBe(false);
     expect(canModerateMember(db, 'user-admin', 'user-owner')).toBe(false);
   });
+// Fim da parte feita a MÃO
 
   it('impede que o organizador altere evento criado por outra pessoa', () => {
     const db = databaseFixture();

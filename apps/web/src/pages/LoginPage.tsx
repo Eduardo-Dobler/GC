@@ -15,6 +15,7 @@ export function LoginPage() {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState('');
 
+  // Começo parte feita a MÃO
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError('');
@@ -36,6 +37,7 @@ export function LoginPage() {
       setLoading(null);
     }
   }
+  // Fim da parte feita a MÃO
 
   async function quickLogin(email: string) {
     setError('');
@@ -72,6 +74,7 @@ export function LoginPage() {
             <button role="tab" aria-selected={mode === 'login'} className={mode === 'login' ? 'tabs__active' : ''} onClick={() => setMode('login')}>Entrar</button>
             <button role="tab" aria-selected={mode === 'register'} className={mode === 'register' ? 'tabs__active' : ''} onClick={() => setMode('register')}>Criar conta</button>
           </div>
+          {/* Começo parte feita a MÃO */}
           <form className="auth-form" onSubmit={handleSubmit}>
             {mode === 'register' && <label>Nome completo<input name="name" required minLength={3} placeholder="Seu nome" /></label>}
             <label>E-mail<input name="email" type="email" required placeholder="voce@gc.local" /></label>
@@ -79,6 +82,7 @@ export function LoginPage() {
             {error && <p className="form-error" role="alert">{error}</p>}
             <Button type="submit" disabled={loading !== null}>{loading === 'form' ? 'Aguarde...' : mode === 'login' ? 'Entrar na comunidade' : 'Criar minha conta'} <ArrowRight size={18} /></Button>
           </form>
+          {/* Fim da parte feita a MÃO */}
           <div className="divider"><span>pessoas e comunidades para explorar</span></div>
           <div className="quick-accounts">{accountsError && <p className="muted">Atalhos indisponíveis. Entre com seu e-mail e senha.</p>}
             {quickAccounts.map((account) => (

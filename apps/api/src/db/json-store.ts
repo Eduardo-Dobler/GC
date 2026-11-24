@@ -9,10 +9,12 @@ export interface JsonStorePaths {
   dataPath: string;
 }
 
+// Começo parte feita a MÃO
 async function readDatabase(path: string): Promise<DemoDatabase> {
   try {
     const raw = await readFile(path, 'utf8');
     const database = demoDatabaseSchema.parse(JSON.parse(raw));
+// Fim da parte feita a MÃO
     if (database.accessPolicyVersion !== 1) {
       for (const roles of [database.roles, ...(database.communitySpaces ?? []).map(space => space.roles)]) {
         for (const role of roles) if (role.system && role.id !== 'role-member' && !role.permissions.includes('CREATE_CHANNELS')) role.permissions.push('CREATE_CHANNELS');
@@ -62,6 +64,7 @@ export class JsonStore {
     return id ? projectCommunity(database, id) : database;
   }
 
+  // Começo parte feita a MÃO
   async mutate(mutator: (database: DemoDatabase) => void | Promise<void>): Promise<DemoDatabase> {
     let result: DemoDatabase | undefined;
     const communityId = this.context.getStore();
@@ -79,6 +82,7 @@ export class JsonStore {
     await operation;
     return result!;
   }
+  // Fim da parte feita a MÃO
 
   async reset(): Promise<DemoDatabase> {
     let result: DemoDatabase | undefined;
@@ -93,10 +97,12 @@ export class JsonStore {
     return result!;
   }
 
+  // Começo parte feita a MÃO
   private async persist(database: DemoDatabase): Promise<void> {
     await mkdir(dirname(this.paths.dataPath), { recursive: true });
     const temporaryPath = `${this.paths.dataPath}.tmp`;
     await writeFile(temporaryPath, `${JSON.stringify(database, null, 2)}\n`, 'utf8');
     await rename(temporaryPath, this.paths.dataPath);
   }
+  // Fim da parte feita a MÃO
 }

@@ -9,6 +9,7 @@ import { ApiError, parseInput } from '../middleware/errors';
 export function notesRouter(store: JsonStore, sessions: SessionStore): Router {
   const router = Router();
   router.use('/notes', requireAuth(store, sessions, false));
+  // Começo parte feita a MÃO
   router.get('/notes', (request, response) => {
     const id = authenticatedUserId(request);
     response.json({ data: (store.snapshot().notes ?? []).filter(note => note.userId === id).sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.updatedAt.localeCompare(a.updatedAt)) });
@@ -37,5 +38,6 @@ export function notesRouter(store: JsonStore, sessions: SessionStore): Router {
     });
     response.status(204).end();
   });
+  // Fim da parte feita a MÃO
   return router;
 }

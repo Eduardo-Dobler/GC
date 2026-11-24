@@ -27,6 +27,7 @@ function sessionData(database: ReturnType<JsonStore['snapshot']>, userId: string
 export function authRouter(store: JsonStore, sessions: SessionStore): Router {
   const router = Router();
 
+  // Começo parte feita a MÃO
   router.post('/login', async (request, response) => {
     const input = parseInput(loginInput, request.body);
     const database = store.snapshot();
@@ -42,14 +43,13 @@ export function authRouter(store: JsonStore, sessions: SessionStore): Router {
     const token = sessions.create(user.id);
     response.json({ data: { token, ...sessionData(database, user.id) } });
   });
+  // Fim da parte feita a MÃO
 
+  // Começo parte feita a MÃO
   router.post('/register', async (request, response) => {
-    // Começo parte feita a MÃO
     const input = parseInput(registerInput, request.body);
-    // Fim da parte feita a MÃO
     const credential = hashPassword(input.password);
     const now = new Date().toISOString();
-    // Começo parte feita a MÃO
     const userId = randomUUID();
     const database = await store.mutate((draft) => {
       if (draft.users.some((candidate) => candidate.email.toLowerCase() === input.email)) {
@@ -71,12 +71,12 @@ export function authRouter(store: JsonStore, sessions: SessionStore): Router {
         activity: [{ label: 'Entrou na comunidade', date: now }],
         ...credential,
       });
-    // Fim da parte feita a MÃO
     });
     const user = database.users.find((candidate) => candidate.id === userId)!;
     const token = sessions.create(userId);
     response.status(201).json({ data: { token, ...sessionData(database, userId) } });
   });
+  // Fim da parte feita a MÃO
 
   router.get('/me', requireAuth(store, sessions, false), (request, response) => {
     const userId = authenticatedUserId(request);

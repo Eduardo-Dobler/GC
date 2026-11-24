@@ -21,13 +21,16 @@ export interface AppProps {
   initialPath?: string;
 }
 
+// Começo parte feita a MÃO
 function AuthenticatedApplication() {
   const { user, loading, activeCommunity } = useAuth();
   if (loading) return <div className="loading-screen"><Logo size="medium" /><p>Carregando demonstração...</p></div>;
   if (!user) return <LoginPage />;
+// Fim da parte feita a MÃO
 
   return (
     <AppShell key={activeCommunity?.id ?? 'default'}>
+      {/* Começo parte feita a MÃO */}
       <Routes>
         <Route path="/configuracoes" element={<SettingsPage />} />
         <Route path="/solicitacoes" element={<RequestsPage />} />
@@ -44,6 +47,7 @@ function AuthenticatedApplication() {
         <Route path="/convites" element={<InvitesPage />} />
         <Route path="*" element={<Navigate to="/inicio" replace />} />
       </Routes>
+      {/* Fim da parte feita a MÃO */}
     </AppShell>
   );
 }

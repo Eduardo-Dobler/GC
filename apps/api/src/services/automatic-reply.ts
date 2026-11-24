@@ -3,6 +3,7 @@ import type { DemoDatabase, DirectMessage, DirectThread } from '@gc/shared';
 import { userPreferences } from './user-settings';
 
 export function automaticReply(database: DemoDatabase, thread: DirectThread, senderId: string, now: string): DirectMessage | undefined {
+  // Começo parte feita a MÃO
   if (thread.participantIds.length !== 2) return;
   const recipientId = thread.participantIds.find(id => id !== senderId);
   const recipient = database.users.find(user => user.id === recipientId && user.memberStatus === 'active');
@@ -21,3 +22,4 @@ export function automaticReply(database: DemoDatabase, thread: DirectThread, sen
 
   return { id: randomUUID(), threadId: thread.id, authorId: recipient.id, content: autoReply.message, createdAt: now, isAutomatic: true };
 }
+  // Fim da parte feita a MÃO

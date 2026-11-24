@@ -33,6 +33,7 @@ export function SettingsPage() {
     setProfile({ name, bio, status, avatarColor: avatarColor ?? '#ff6a00', avatarUrl: avatarUrl ?? '', statusMessage: statusMessage ?? '' });
     setDraft(structuredClone(saved.preferences));
   }
+  // Começo parte feita a MÃO
   async function selectPhoto(file?: File) {
     if (!file) return;
     setPhotoBusy(true); setError('');
@@ -52,6 +53,7 @@ export function SettingsPage() {
     } catch (caught) { setError(caught instanceof Error ? caught.message : 'Não foi possível salvar as configurações.'); }
     finally { setSaving(false); }
   }
+  // Fim da parte feita a MÃO
   function changeReply(values: Partial<UserPreferences['autoReply']>) {
     setDraft(current => ({ ...current, autoReply: { ...current.autoReply, ...values } }));
   }
@@ -87,7 +89,9 @@ export function SettingsPage() {
             {/* Fim da parte feita a MÃO */}
             <div className="form-field"><label htmlFor="profile-name">Nome de exibição</label><input id="profile-name" minLength={3} maxLength={60} required value={profile.name} onChange={event => setProfile(current => ({ ...current, name: event.target.value }))} autoComplete="name" /></div>
             <div className="form-field"><label htmlFor="profile-bio">Sobre você</label><textarea id="profile-bio" rows={3} maxLength={500} value={profile.bio} onChange={event => setProfile(current => ({ ...current, bio: event.target.value }))} placeholder="Conte um pouco sobre você." /></div>
+            {/* Começo parte feita a MÃO */}
             <div className="settings-profile-options"><div className="form-field"><label htmlFor="profile-status">Status</label><select id="profile-status" value={profile.status} onChange={event => setProfile(current => ({ ...current, status: event.target.value as typeof current.status }))}><option value="online">Online</option><option value="away">Ausente</option><option value="offline">Offline</option></select></div><div className="form-field"><label htmlFor="profile-color">Cor do avatar</label><input id="profile-color" type="color" value={profile.avatarColor} onChange={event => setProfile(current => ({ ...current, avatarColor: event.target.value }))} /></div></div>
+            {/* Fim da parte feita a MÃO */}
             <p className="helper-text">Seu perfil é o mesmo em todas as comunidades. A resposta automática funciona independentemente do status escolhido.</p>
           </section>
 

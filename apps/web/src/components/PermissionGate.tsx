@@ -8,6 +8,8 @@ interface PermissionGateProps {
   fallback?: ReactNode;
 }
 
+// Começo parte feita a MÃO
 export function PermissionGate({ permissions, requires, children, fallback = null }: PermissionGateProps) {
   return permissions.includes(requires) ? <>{children}</> : <>{fallback}</>;
 }
+// Fim da parte feita a MÃO

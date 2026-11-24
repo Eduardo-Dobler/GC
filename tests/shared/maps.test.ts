@@ -15,5 +15,5 @@ describe('Google Maps', () => {
     expect(googleMapsOpenUrl(embed)).toBe('https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul');
     expect(googleMapsOpenUrl('', 'SENAC Caxias do Sul')).toBe('https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul');
   });
-  // Fim da parte feita a MÃO
 });
+  // Fim da parte feita a MÃO
