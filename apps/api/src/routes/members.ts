@@ -91,7 +91,6 @@ export function membersRouter(store: JsonStore, sessions: SessionStore): Router 
       });
     });
     const member = database.users.find((candidate) => candidate.id === memberId)!;
-    // A moderação afeta apenas o vínculo desta comunidade.
     response.json({ data: toMemberView(database, actorId, database.users.find((candidate) => candidate.id === member.id)!, request.communityId) });
   });
 

@@ -10,7 +10,6 @@ const releaseRoot = resolve(projectRoot, 'release');
 
 async function createRelease() {
   await buildWeb({ root: webRoot, configFile: resolve(webRoot, 'vite.config.ts') });
-  // O banco ativo fica em release/data; reconstruir não deve restaurar a demo.
   await rm(resolve(releaseRoot, 'public'), { recursive: true, force: true });
   await mkdir(resolve(releaseRoot, 'data'), { recursive: true });
 

@@ -14,6 +14,7 @@ export function MembersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Começo parte feita a MÃO
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -32,6 +33,7 @@ export function MembersPage() {
   }, []);
 
   useEffect(() => { void load(); }, [load]);
+  // Fim da parte feita a MÃO
 
   const filtered = useMemo(() => {
     const term = query.trim().toLocaleLowerCase('pt-BR');

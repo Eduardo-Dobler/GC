@@ -11,7 +11,6 @@ function googleUrl(value: string): URL | null {
   }
 }
 
-/** Returns only a Maps URL, never HTML. Empty fields are valid; invalid values return null. */
 export function normalizeGoogleMapsUrl(value: string): string | null {
   const input = value.trim();
   if (!input) return '';
@@ -24,7 +23,6 @@ export function normalizeGoogleMapsUrl(value: string): string | null {
   return ((googleHosts.has(url.hostname) && (mapsPath || mapsSubdomain)) || sharedLink || legacySharedLink) ? url.href : null;
 }
 
-/** Extracts the quoted src from a pasted iframe and discards all other attributes. */
 export function normalizeGoogleMapsEmbedUrl(value: string): string | null {
   let input = value.trim();
   if (!input) return '';
@@ -58,7 +56,6 @@ export function normalizeGoogleMapsEmbedUrl(value: string): string | null {
   return shareEmbed || legacyEmbed || apiEmbed ? url.href : null;
 }
 
-/** Creates a normal Maps page URL for the action button, without exposing iframe HTML. */
 export function googleMapsOpenUrl(value: string, fallbackDescription = ''): string | null {
   const embed = normalizeGoogleMapsEmbedUrl(value);
   if (embed) {
@@ -89,7 +86,6 @@ export function validMapPoint(value: unknown): value is MapPoint {
     && Math.abs(point.lat) <= 90 && Math.abs(point.lng) <= 180;
 }
 
-/** Restore a saved pin from GC-generated URLs or a Google Maps coordinate URL. */
 export function mapPointFromUrl(value: string): MapPoint | null {
   const normalized = normalizeGoogleMapsUrl(value) || normalizeGoogleMapsEmbedUrl(value);
   if (!normalized) return null;

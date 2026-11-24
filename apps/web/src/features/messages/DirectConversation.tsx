@@ -21,7 +21,6 @@ export function DirectConversation({ thread, messages, onSend, sendOnEnter = fal
       await onSend(value);
       setContent('');
     } catch {
-      // A página mostra o erro; preserva o rascunho para tentar novamente.
     } finally {
       setSending(false);
     }

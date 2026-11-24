@@ -13,7 +13,25 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'web',
+          include: ['tests/web/**/*.test.tsx'],
+          environment: 'jsdom',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
+          exclude: ['tests/web/**/*.test.tsx'],
+          environment: 'node',
+        },
+      },
+    ],
     pool: 'forks',
     setupFiles: ['tests/web/setup.ts'],
   },

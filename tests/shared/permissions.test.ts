@@ -18,9 +18,11 @@ describe('regras de permissão', () => {
     expect(canManageEvent(db, 'user-organizer', other)).toBe(false);
   });
 
+  // Começo parte feita a MÃO
   it('nega a ação quando a permissão não estiver atribuída ao cargo', () => {
     const db = databaseFixture();
     expect(hasPermission(db, 'user-admin', 'MANAGE_ROLES')).toBe(true);
     expect(hasPermission(db, 'user-member', 'MANAGE_ROLES')).toBe(false);
   });
+  // Fim da parte feita a MÃO
 });

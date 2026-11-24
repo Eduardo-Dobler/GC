@@ -2,9 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { DemoDatabase, DirectMessage, DirectThread } from '@gc/shared';
 import { userPreferences } from './user-settings';
 
-/** Chamado dentro da fila de escrita, antes de inserir a mensagem humana. */
 export function automaticReply(database: DemoDatabase, thread: DirectThread, senderId: string, now: string): DirectMessage | undefined {
-  // Só conversas individuais já autorizadas; grupos e canais não recebem respostas automáticas.
   if (thread.participantIds.length !== 2) return;
   const recipientId = thread.participantIds.find(id => id !== senderId);
   const recipient = database.users.find(user => user.id === recipientId && user.memberStatus === 'active');
@@ -21,6 +19,5 @@ export function automaticReply(database: DemoDatabase, thread: DirectThread, sen
     && formatter.format(new Date(message.createdAt)) === today);
   if (alreadyContacted) return;
 
-  // A resposta é inserida junto da mensagem recebida, sem disparar novamente este serviço.
   return { id: randomUUID(), threadId: thread.id, authorId: recipient.id, content: autoReply.message, createdAt: now, isAutomatic: true };
 }

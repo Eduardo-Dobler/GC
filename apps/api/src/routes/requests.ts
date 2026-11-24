@@ -39,7 +39,6 @@ export function requestsRouter(store: JsonStore, sessions: SessionStore): Router
           let thread = draft.directThreads.find(t => t.id === item.targetId);
           if (!thread) {
             const participantIds = [...new Set([...item.participantIds, userId])].filter(id => draft.users.some(u => u.id === id && u.memberStatus === 'active'));
-            // Reutiliza uma conversa individual aceita por outro fluxo enquanto o pedido aguardava.
             const existing = draft.directThreads.find(t => t.participantIds.length === participantIds.length && participantIds.every(id => t.participantIds.includes(id)));
             if (existing) { thread = existing; item.targetId = existing.id; }
             else { thread = { id: item.targetId, name: item.title, participantIds, updatedAt: new Date().toISOString() }; draft.directThreads.push(thread); }

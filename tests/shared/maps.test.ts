@@ -9,9 +9,11 @@ describe('Google Maps', () => {
     expect(normalizeGoogleMapsEmbedUrl(html.replace('demo-key', 'YOUR_API_KEY'))).toBeNull();
   });
 
+  // Começo parte feita a MÃO
   it('converte a incorporação em uma URL de abertura do Maps', () => {
     const embed = 'https://www.google.com/maps/embed/v1/place?key=demo-key&q=SENAC+Caxias+do+Sul';
     expect(googleMapsOpenUrl(embed)).toBe('https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul');
     expect(googleMapsOpenUrl('', 'SENAC Caxias do Sul')).toBe('https://www.google.com/maps/search/?api=1&query=SENAC%20Caxias%20do%20Sul');
   });
+  // Fim da parte feita a MÃO
 });

@@ -47,6 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [loading, setLoading] = useState(() => Boolean(localStorage.getItem(TOKEN_KEY)));
 
+  // Começo parte feita a MÃO
   const clearSession = useCallback(() => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(COMMUNITY_KEY);
@@ -56,6 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPermissions([]);
     setLoading(false);
   }, []);
+  // Fim da parte feita a MÃO
 
   const refreshUser = useCallback(async () => {
     const payload = await api.get<SessionPayload>('/auth/me');
@@ -108,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     applyAuth(await api.post<AuthPayload>('/auth/register', values));
   }, [applyAuth]);
 
+  // Começo parte feita a MÃO
   const logout = useCallback(async () => {
     try {
       await api.post('/auth/logout');
@@ -115,6 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       clearSession();
     }
   }, [clearSession]);
+  // Fim da parte feita a MÃO
 
   const saveSettings = useCallback(async (input: SettingsUpdate) => {
     const token = localStorage.getItem(TOKEN_KEY);

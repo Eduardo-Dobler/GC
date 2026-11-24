@@ -3,7 +3,6 @@ import { expect, it, vi } from 'vitest';
 import type { JsonStore } from '../../apps/api/src/db/json-store';
 import { createTestApp, loginAs } from './test-app';
 
-// Observa a entrada das requisições na fila sem substituir a persistência real.
 async function runInWriteOrder(store: JsonStore, first: Test, second: Test) {
   let unlock!: () => void;
   let started!: () => void;

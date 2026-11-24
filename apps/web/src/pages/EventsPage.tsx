@@ -43,6 +43,7 @@ export function EventsPage() {
     return permissions.includes('MANAGE_EVENTS') || (permissions.includes('CREATE_EVENTS') && event.createdBy === user?.id);
   }
 
+  // Começo parte feita a MÃO
   async function attendance(event: EventView, status: 'going' | 'not_going') {
     try {
       const updated = await api.put<EventView>(`/events/${event.id}/attendance`, { status });
@@ -52,6 +53,7 @@ export function EventsPage() {
       notify(caught instanceof Error ? caught.message : 'Não foi possível atualizar sua presença.', 'error');
     }
   }
+  // Fim da parte feita a MÃO
 
   async function save(values: EventFormValues) {
     const saved = editing

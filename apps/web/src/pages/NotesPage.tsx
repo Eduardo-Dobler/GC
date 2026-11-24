@@ -25,7 +25,10 @@ function NoteEditor({ note, busy, error, onSave }: { note?: PersonalNote; busy: 
     event.preventDefault(); const form = new FormData(event.currentTarget);
     const rows = String(form.get('table')).trim();
     void onSave({
-      title: String(form.get('title')), content, color, pinned: form.get('pinned') === 'on',
+      title: String(form.get('title')), content, color,
+      // Começo parte feita a MÃO
+      pinned: form.get('pinned') === 'on',
+      // Fim da parte feita a MÃO
       checklist: String(form.get('checklist')).split('\n').map(text => text.trim()).filter(Boolean).map(text => ({ text, done: note?.checklist.find(item => item.text === text)?.done ?? false })),
       table: rows ? rows.split('\n').map(row => row.split('|').map(cell => cell.trim())) : [],
       locationDescription: String(form.get('locationDescription')), googleMapsUrl: mapsUrl,
@@ -35,7 +38,11 @@ function NoteEditor({ note, busy, error, onSave }: { note?: PersonalNote; busy: 
     <label className="form-field">Título<input name="title" required maxLength={80} defaultValue={note?.title} placeholder="Uma ideia, um lembrete, um plano..." /></label>
     <div className="note-toolbar" role="toolbar" aria-label="Formatação da anotação"><button type="button" onClick={() => insert('**', '**')} title="Negrito" aria-label="Negrito"><Bold size={17} /></button><button type="button" onClick={() => insert('*', '*')} title="Itálico" aria-label="Itálico"><Italic size={17} /></button><button type="button" onClick={() => insert('\n- ')} title="Lista" aria-label="Lista"><List size={17} /></button><button type="button" onClick={() => insert('[', '](https://exemplo.com)')} title="Link" aria-label="Inserir link"><LinkIcon size={17} /></button></div>
     <label className="form-field">Anotação<textarea ref={textArea} value={content} onChange={event => setContent(event.target.value)} maxLength={12000} rows={7} placeholder="Escreva aqui. Selecione um trecho e use os botões para formatar." /></label>
-    <div className="note-editor__options"><fieldset><legend>Cor do card</legend>{colors.map(item => <label key={item} className="note-color" style={{ backgroundColor: item }}><input type="radio" name="color" aria-label={`Cor ${item}`} checked={color === item} onChange={() => setColor(item)} /></label>)}</fieldset><label><input name="pinned" type="checkbox" defaultChecked={note?.pinned} /> Fixar no topo</label></div>
+    <div className="note-editor__options"><fieldset><legend>Cor do card</legend>{colors.map(item => <label key={item} className="note-color" style={{ backgroundColor: item }}><input type="radio" name="color" aria-label={`Cor ${item}`} checked={color === item} onChange={() => setColor(item)} /></label>)}</fieldset>
+      {/* Começo parte feita a MÃO */}
+      <label><input name="pinned" type="checkbox" defaultChecked={note?.pinned} /> Fixar no topo</label>
+      {/* Fim da parte feita a MÃO */}
+    </div>
     <label className="form-field">Checklist (um item por linha)<textarea name="checklist" rows={3} defaultValue={note?.checklist.map(item => item.text).join('\n')} placeholder="Preparar apresentação&#10;Revisar os eventos" /></label>
     <details><summary>Tabela e localização</summary><div className="note-editor__extras"><label className="form-field">Tabela (separe colunas com |)<textarea name="table" rows={4} defaultValue={note?.table.map(row => row.join(' | ')).join('\n')} placeholder="Tarefa | Prazo&#10;Apresentação | Sexta-feira" /></label><p className="helper-text">Até 20 linhas e 8 colunas. A primeira linha será o cabeçalho.</p><label className="form-field">Descrição do local<input name="locationDescription" maxLength={500} defaultValue={note?.locationDescription} placeholder="Ex.: sala de informática do SENAC" /></label><MapLocationPicker value={mapsUrl} onSelect={location => setMapsUrl(location.googleMapsUrl)} /><label className="form-field">Link do Google Maps<input name="googleMapsUrl" type="url" value={mapsUrl} onChange={event => setMapsUrl(event.target.value)} placeholder="https://www.google.com/maps/..." /></label></div></details>
     {error && <p className="form-error" role="alert">{error}</p>}

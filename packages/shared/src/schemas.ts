@@ -5,7 +5,6 @@ import { AUTO_REPLY_TIME_ZONES, DEFAULT_USER_PREFERENCES } from './settings';
 
 const isoDate = z.string().datetime({ offset: true });
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Informe uma cor hexadecimal válida.');
-// Fotos são armazenadas no JSON como imagens raster, nunca HTML ou URLs externas.
 const avatarUrl = z.string().max(180000, 'A foto ficou muito grande. Escolha outra imagem.')
   .refine(value => value === '' || /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(value), 'Selecione uma foto JPG, PNG ou WebP.');
 const statusMessage = z.string().trim().max(80, 'Use até 80 caracteres no status.');

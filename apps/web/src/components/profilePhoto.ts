@@ -1,6 +1,5 @@
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
-/** Resize and crop locally before the photo is sent to the JSON API. */
 export async function prepareProfilePhoto(file: File): Promise<string> {
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
     throw new Error('Escolha uma foto JPG, PNG ou WebP.');

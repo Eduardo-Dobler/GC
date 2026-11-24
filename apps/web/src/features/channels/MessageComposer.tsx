@@ -15,7 +15,6 @@ export function MessageComposer({ channelName, disabled, onSend, sendOnEnter = f
       await onSend(value);
       setContent('');
     } catch {
-      // A página mostra o erro; preserva o rascunho para tentar novamente.
     } finally {
       setSending(false);
     }

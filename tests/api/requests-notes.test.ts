@@ -78,7 +78,6 @@ it('considera o cargo da comunidade ativa ao decidir se há solicitação', asyn
   const id = created.body.data.community.id;
   const fromSenac = await request(app).post('/api/direct-threads').auth(pedro, { type: 'bearer' }).send({ participantIds: ['user-admin'] }).expect(202);
   expect(fromSenac.body.data.requests).toHaveLength(1);
-  // A solicitação anterior não promove Marina dentro do novo grupo.
   const fromProject = await request(app).post('/api/direct-threads').set('X-Community-Id', id).auth(pedro, { type: 'bearer' }).send({ participantIds: ['user-admin'] }).expect(201);
   expect(fromProject.body.data.participantIds).toEqual(['user-member', 'user-admin']);
 });
@@ -90,7 +89,6 @@ it('aceita inclusão em canal privado de outra comunidade sem expor o canal orig
   const cid = created.body.data.community.id;
   const role = await request(app).get('/api/roles').set('X-Community-Id', cid).auth(pedro, { type: 'bearer' }).expect(200);
   expect(role.body.data.find((item: { id: string }) => item.id === 'role-owner').permissions).toContain('CREATE_CHANNELS');
-  // Marina é membro e Pedro é dono nesta comunidade: convite direto, sem solicitação.
   const channel = await request(app).post('/api/channels').set('X-Community-Id', cid).auth(pedro, { type: 'bearer' }).send({ name: 'Planejamento', type: 'private', allowedUserIds: ['user-admin'] }).expect(201);
   await request(app).get(`/api/channels/${channel.body.data.id}/messages`).set('X-Community-Id', cid).auth(marina, { type: 'bearer' }).expect(200);
   await request(app).get(`/api/channels/${channel.body.data.id}/messages`).auth(marina, { type: 'bearer' }).expect(404);
