@@ -10,7 +10,6 @@ interface ModalProps {
   wide?: boolean;
 }
 
-// Começo parte feita a MÃO
 export function Modal({ open, title, children, onClose, footer, wide = false }: ModalProps) {
   useEffect(() => {
     if (!open) return;
@@ -35,4 +34,3 @@ export function Modal({ open, title, children, onClose, footer, wide = false }: 
     </div>
   );
 }
-// Fim da parte feita a MÃO

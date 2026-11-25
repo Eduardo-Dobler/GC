@@ -6,7 +6,6 @@ export interface ChannelWithAccess extends Channel {
   canPost: boolean;
 }
 
-// Começo parte feita a MÃO
 export function ChannelList({ channels, selectedId, onSelect }: { channels: ChannelWithAccess[]; selectedId: string; onSelect: (id: string) => void }) {
   return (
     <nav className="channel-list" aria-label="Canais da comunidade">
@@ -24,4 +23,3 @@ export function ChannelList({ channels, selectedId, onSelect }: { channels: Chan
     </nav>
   );
 }
-// Fim da parte feita a MÃO

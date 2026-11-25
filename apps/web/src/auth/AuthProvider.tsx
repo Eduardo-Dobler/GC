@@ -47,7 +47,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [loading, setLoading] = useState(() => Boolean(localStorage.getItem(TOKEN_KEY)));
 
-  // Começo parte feita a MÃO
   const clearSession = useCallback(() => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(COMMUNITY_KEY);
@@ -57,7 +56,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPermissions([]);
     setLoading(false);
   }, []);
-  // Fim da parte feita a MÃO
 
   const refreshUser = useCallback(async () => {
     const payload = await api.get<SessionPayload>('/auth/me');
@@ -83,7 +81,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('gc-session-expired', clearSession);
   }, [clearSession]);
 
-  // Começo parte feita a MÃO
   const applyAuth = useCallback((payload: AuthPayload) => {
     localStorage.setItem(TOKEN_KEY, payload.token);
     setActiveCommunity(payload.activeCommunity ?? null);
@@ -93,7 +90,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (payload.preferences) setPreferences(payload.preferences);
     setPermissions(payload.permissions);
   }, []);
-  // Fim da parte feita a MÃO
 
   const switchCommunity = useCallback(async (id: string) => {
     const payload = await api.get<SessionPayload>(`/communities/${encodeURIComponent(id)}/session`);
@@ -104,17 +100,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPermissions(payload.permissions);
   }, []);
 
-  // Começo parte feita a MÃO
   const login = useCallback(async (email: string, password: string) => {
     applyAuth(await api.post<AuthPayload>('/auth/login', { email, password }));
   }, [applyAuth]);
-  // Fim da parte feita a MÃO
 
   const register = useCallback(async (values: RegisterValues) => {
     applyAuth(await api.post<AuthPayload>('/auth/register', values));
   }, [applyAuth]);
 
-  // Começo parte feita a MÃO
   const logout = useCallback(async () => {
     try {
       await api.post('/auth/logout');
@@ -122,7 +115,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       clearSession();
     }
   }, [clearSession]);
-  // Fim da parte feita a MÃO
 
   const saveSettings = useCallback(async (input: SettingsUpdate) => {
     const token = localStorage.getItem(TOKEN_KEY);

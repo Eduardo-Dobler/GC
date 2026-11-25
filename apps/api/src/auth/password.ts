@@ -5,7 +5,6 @@ export interface PasswordCredential {
   passwordHash: string;
 }
 
-// Começo parte feita a MÃO
 export function hashPassword(password: string): PasswordCredential {
   const passwordSalt = randomBytes(16).toString('hex');
   const passwordHash = scryptSync(password, passwordSalt, 64).toString('hex');
@@ -21,5 +20,4 @@ export function verifyPassword(password: string, salt: string, hash: string): bo
   } catch {
     return false;
   }
-// Fim da parte feita a MÃO
 }

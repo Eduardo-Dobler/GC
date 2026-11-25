@@ -3,7 +3,6 @@ import { Send } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
 export function MessageComposer({ channelName, disabled, onSend, sendOnEnter = false }: { channelName: string; disabled: boolean; sendOnEnter?: boolean; onSend: (content: string) => Promise<void> }) {
-  // Começo parte feita a MÃO
   const [content, setContent] = useState('');
   const [sending, setSending] = useState(false);
 
@@ -20,9 +19,7 @@ export function MessageComposer({ channelName, disabled, onSend, sendOnEnter = f
       setSending(false);
     }
   }
-  // Fim da parte feita a MÃO
 
-  // Começo parte feita a MÃO
   return (
     <form className="message-composer" onSubmit={submit}>
       <label className="sr-only" htmlFor="channel-message">Mensagem para #{channelName}</label>
@@ -31,5 +28,4 @@ export function MessageComposer({ channelName, disabled, onSend, sendOnEnter = f
       <button type="submit" disabled={disabled || sending || !content.trim()} aria-label="Enviar mensagem"><Send size={18} /></button>
     </form>
   );
-  // Fim da parte feita a MÃO
 }

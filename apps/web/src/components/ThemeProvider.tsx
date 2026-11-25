@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 
 export type Theme = 'light' | 'dark';
 
-// Começo parte feita a MÃO
 const THEME_KEY = 'gc_theme';
 const ThemeContext = createContext<{ theme: Theme; setTheme: (theme: Theme) => void; toggleTheme: () => void } | null>(null);
 
@@ -20,7 +19,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return <ThemeContext.Provider value={{ theme, setTheme, toggleTheme: () => setTheme((current) => current === 'light' ? 'dark' : 'light') }}>{children}</ThemeContext.Provider>;
 }
-// Fim da parte feita a MÃO
 
 export function useTheme() {
   const context = useContext(ThemeContext);

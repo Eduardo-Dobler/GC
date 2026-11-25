@@ -7,16 +7,13 @@ import { MemberCard } from '../features/members/MemberCard';
 import { MemberProfileModal } from '../features/members/MemberProfileModal';
 
 export function MembersPage() {
-  // Começo parte feita a MÃO
   const [members, setMembers] = useState<MemberView[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
   const [selected, setSelected] = useState<MemberView | null>(null);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  // Fim da parte feita a MÃO
 
-  // Começo parte feita a MÃO
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -35,22 +32,18 @@ export function MembersPage() {
   }, []);
 
   useEffect(() => { void load(); }, [load]);
-  // Fim da parte feita a MÃO
 
-  // Começo parte feita a MÃO
   const filtered = useMemo(() => {
     const term = query.trim().toLocaleLowerCase('pt-BR');
     if (!term) return members;
     return members.filter((member) => `${member.name} ${member.email} ${member.role.name}`.toLocaleLowerCase('pt-BR').includes(term));
   }, [members, query]);
-  // Fim da parte feita a MÃO
 
   const updateMember = (updated: MemberView) => {
     setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
     setSelected(updated);
   };
 
-  // Começo parte feita a MÃO
   if (loading) return <div className="page-state"><span className="spinner" /> Carregando membros...</div>;
   if (error) return <div className="page-state page-state--error"><p>{error}</p><Button variant="secondary" onClick={() => void load()}><RefreshCw size={17} /> Tentar novamente</Button></div>;
 
@@ -65,7 +58,6 @@ export function MembersPage() {
       {selected && <MemberProfileModal member={selected} roles={roles} onClose={() => setSelected(null)} onUpdate={updateMember} />}
     </section>
   );
-  // Fim da parte feita a MÃO
 }
 
 function BadgeCount({ count }: { count: number }) {

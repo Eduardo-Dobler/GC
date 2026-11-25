@@ -22,7 +22,6 @@ export function EventsPage() {
   const [editing, setEditing] = useState<EventView | null>(null);
   const [deleting, setDeleting] = useState<EventView | null>(null);
 
-  // Começo parte feita a MÃO
   const load = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -38,14 +37,12 @@ export function EventsPage() {
   }, [category, period]);
 
   useEffect(() => { void load(); }, [load]);
-  // Fim da parte feita a MÃO
   const categories = useMemo(() => Array.from(new Set(events.map((event) => event.category))), [events]);
 
   function canEdit(event: EventView) {
     return permissions.includes('MANAGE_EVENTS') || (permissions.includes('CREATE_EVENTS') && event.createdBy === user?.id);
   }
 
-  // Começo parte feita a MÃO
   async function attendance(event: EventView, status: 'going' | 'not_going') {
     try {
       const updated = await api.put<EventView>(`/events/${event.id}/attendance`, { status });
@@ -55,7 +52,6 @@ export function EventsPage() {
       notify(caught instanceof Error ? caught.message : 'Não foi possível atualizar sua presença.', 'error');
     }
   }
-  // Fim da parte feita a MÃO
 
   async function save(values: EventFormValues) {
     const saved = editing

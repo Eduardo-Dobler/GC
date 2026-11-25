@@ -9,11 +9,9 @@ describe('pontos selecionados no mapa', () => {
     expect(mapPointFromUrl(links.googleMapsUrl)).toEqual(point);
     expect(mapPointFromUrl(links.googleMapsEmbedUrl)).toEqual(point);
   });
-  // Começo parte feita a MÃO
   it.each([null, {}, { lat: NaN, lng: 0 }, { lat: 91, lng: 0 }, { lat: 0, lng: 181 }, { lat: '1', lng: 2 }])('rejeita coordenadas inválidas %j', point => {
     expect(validMapPoint(point)).toBe(false);
   });
-  // Fim da parte feita a MÃO
   it('não interpreta endereços, links encurtados ou hosts externos como coordenadas', () => {
     expect(mapPointFromUrl('https://www.google.com/maps?q=SENAC')).toBeNull();
     expect(mapPointFromUrl('https://maps.app.goo.gl/example')).toBeNull();

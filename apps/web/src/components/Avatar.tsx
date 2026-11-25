@@ -9,7 +9,6 @@ interface AvatarProps {
   status?: 'online' | 'away' | 'offline';
 }
 
-// Começo parte feita a MÃO
 export function Avatar({ name, color = '#777777', src, statusMessage, size = 'medium', status }: AvatarProps) {
   const [failedSource, setFailedSource] = useState<string>();
   const initials = name.split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
@@ -21,4 +20,3 @@ export function Avatar({ name, color = '#777777', src, statusMessage, size = 'me
     </span>
   );
 }
-// Fim da parte feita a MÃO

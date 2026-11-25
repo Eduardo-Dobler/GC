@@ -11,7 +11,6 @@ function PickerPanel({ value, onSelect, onClose }: PickerProps & { onClose: () =
   const [point, setPoint] = useState<MapPoint | null>(initial);
   const [mapError, setMapError] = useState('');
   const frame = useRef<HTMLIFrameElement>(null);
-  // Começo parte feita a MÃO
   useEffect(() => {
     const receive = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
@@ -25,9 +24,7 @@ function PickerPanel({ value, onSelect, onClose }: PickerProps & { onClose: () =
     window.addEventListener('message', receive);
     return () => window.removeEventListener('message', receive);
   }, []);
-  // Fim da parte feita a MÃO
   const hash = initial ? `#${initial.lat},${initial.lng}` : '';
-  // Começo parte feita a MÃO
   return <div className="map-picker__panel">
     <p>Clique ou toque no mapa para marcar o ponto. Arraste para navegar e use + e − para aproximar. Confirme para preencher o link.</p>
     <iframe ref={frame} className="map-picker__frame" title="Selecionar localização no mapa" src={`/map-picker.html${hash}`} allow="geolocation" />
@@ -39,7 +36,6 @@ function PickerPanel({ value, onSelect, onClose }: PickerProps & { onClose: () =
     </div>
     <p className="helper-text">Seleção com OpenStreetMap. O link salvo abre o ponto no Google Maps. Requer internet.</p>
   </div>;
-  // Fim da parte feita a MÃO
 }
 
 export function MapLocationPicker({ value, onSelect }: PickerProps) {

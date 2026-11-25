@@ -7,11 +7,9 @@ export const runtimeConfig = {
   projectRoot: resolve(process.env.GC_PROJECT_ROOT ?? defaultRoot),
 };
 
-// Começo parte feita a MÃO
 export function databasePaths(root = runtimeConfig.projectRoot) {
   return {
     seedPath: resolve(root, 'data/seed.json'),
     dataPath: resolve(root, 'data/gc-demo.json'),
   };
 }
-// Fim da parte feita a MÃO

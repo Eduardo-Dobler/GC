@@ -57,7 +57,6 @@ export function requireAuth(store: JsonStore, sessions: SessionStore, communityS
   };
 }
 
-// Começo parte feita a MÃO
 export function requirePermission(store: JsonStore, permission: Permission): RequestHandler {
   return (request, _response, next) => {
     if (!request.userId || !hasPermission(store.snapshot(), request.userId, permission)) {
@@ -67,7 +66,6 @@ export function requirePermission(store: JsonStore, permission: Permission): Req
     next();
   };
 }
-// Fim da parte feita a MÃO
 
 export function authenticatedUserId(request: Express.Request): string {
   if (!request.userId) throw new ApiError(401, 'AUTH_REQUIRED', 'Entre novamente para continuar.');

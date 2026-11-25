@@ -6,7 +6,6 @@ export interface Session {
   expiresAt: number;
 }
 
-// Começo parte feita a MÃO
 const EIGHT_HOURS = 8 * 60 * 60 * 1000;
 
 export class SessionStore {
@@ -36,7 +35,6 @@ export class SessionStore {
   delete(token: string): void {
     this.sessions.delete(token);
   }
-// Fim da parte feita a MÃO
 
   deleteUser(userId: string): void {
     for (const [token, session] of this.sessions) {

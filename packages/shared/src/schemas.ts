@@ -196,7 +196,6 @@ export const communityInput = z.object({
   memberIds: z.array(z.string().min(1)).max(99).default([]),
 });
 
-// Começo parte feita a MÃO
 export const loginInput = z.object({
   email: z.string().trim().toLowerCase().email('Informe um e-mail válido.'),
   password: z.string().min(1, 'Informe sua senha.'),
@@ -211,7 +210,6 @@ export const registerInput = z.object({
 export const messageInput = z.object({
   content: z.string().trim().min(1, 'Digite uma mensagem.').max(500, 'Use até 500 caracteres.'),
 });
-// Fim da parte feita a MÃO
 
 export const directThreadInput = z.object({
   participantIds: z.array(z.string().min(1)).min(1, 'Selecione pelo menos uma pessoa.').max(99),

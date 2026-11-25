@@ -14,7 +14,6 @@ export class ApiClientError extends Error {
   }
 }
 
-// Começo parte feita a MÃO
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = localStorage.getItem(TOKEN_KEY);
   const headers = new Headers(init.headers);
@@ -38,9 +37,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
   return payload.data as T;
 }
-// Fim da parte feita a MÃO
 
-// Começo parte feita a MÃO
 export const api = {
   get: <T>(path: string) => request<T>(path),
   post: <T>(path: string, body?: unknown) => request<T>(path, {
@@ -57,4 +54,3 @@ export const api = {
   }),
   delete: <T = void>(path: string) => request<T>(path, { method: 'DELETE' }),
 };
-// Fim da parte feita a MÃO

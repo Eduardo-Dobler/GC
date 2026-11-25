@@ -21,7 +21,6 @@ function NoteEditor({ note, busy, error, onSave }: { note?: PersonalNote; busy: 
     setContent(content.slice(0, start) + before + (content.slice(start, end) || 'texto') + after + content.slice(end));
     input.focus();
   }
-  // Começo parte feita a MÃO
   function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form = new FormData(event.currentTarget);
     const rows = String(form.get('table')).trim();
@@ -33,16 +32,13 @@ function NoteEditor({ note, busy, error, onSave }: { note?: PersonalNote; busy: 
       locationDescription: String(form.get('locationDescription')), googleMapsUrl: mapsUrl,
     });
   }
-  // Fim da parte feita a MÃO
   return <form className="note-editor" onSubmit={save}>
     <label className="form-field">Título<input name="title" required maxLength={80} defaultValue={note?.title} placeholder="Uma ideia, um lembrete, um plano..." /></label>
     <div className="note-toolbar" role="toolbar" aria-label="Formatação da anotação"><button type="button" onClick={() => insert('**', '**')} title="Negrito" aria-label="Negrito"><Bold size={17} /></button><button type="button" onClick={() => insert('*', '*')} title="Itálico" aria-label="Itálico"><Italic size={17} /></button><button type="button" onClick={() => insert('\n- ')} title="Lista" aria-label="Lista"><List size={17} /></button><button type="button" onClick={() => insert('[', '](https://exemplo.com)')} title="Link" aria-label="Inserir link"><LinkIcon size={17} /></button></div>
     <label className="form-field">Anotação<textarea ref={textArea} value={content} onChange={event => setContent(event.target.value)} maxLength={12000} rows={7} placeholder="Escreva aqui. Selecione um trecho e use os botões para formatar." /></label>
-    {/* Começo parte feita a MÃO */}
     <div className="note-editor__options"><fieldset><legend>Cor do card</legend>{colors.map(item => <label key={item} className="note-color" style={{ backgroundColor: item }}><input type="radio" name="color" aria-label={`Cor ${item}`} checked={color === item} onChange={() => setColor(item)} /></label>)}</fieldset>
       <label><input name="pinned" type="checkbox" defaultChecked={note?.pinned} /> Fixar no topo</label>
     </div>
-    {/* Fim da parte feita a MÃO */}
     <label className="form-field">Checklist (um item por linha)<textarea name="checklist" rows={3} defaultValue={note?.checklist.map(item => item.text).join('\n')} placeholder="Preparar apresentação&#10;Revisar os eventos" /></label>
     <details><summary>Tabela e localização</summary><div className="note-editor__extras"><label className="form-field">Tabela (separe colunas com |)<textarea name="table" rows={4} defaultValue={note?.table.map(row => row.join(' | ')).join('\n')} placeholder="Tarefa | Prazo&#10;Apresentação | Sexta-feira" /></label><p className="helper-text">Até 20 linhas e 8 colunas. A primeira linha será o cabeçalho.</p><label className="form-field">Descrição do local<input name="locationDescription" maxLength={500} defaultValue={note?.locationDescription} placeholder="Ex.: sala de informática do SENAC" /></label><MapLocationPicker value={mapsUrl} onSelect={location => setMapsUrl(location.googleMapsUrl)} /><label className="form-field">Link do Google Maps<input name="googleMapsUrl" type="url" value={mapsUrl} onChange={event => setMapsUrl(event.target.value)} placeholder="https://www.google.com/maps/..." /></label></div></details>
     {error && <p className="form-error" role="alert">{error}</p>}
@@ -58,7 +54,6 @@ export function NotesPage() {
   const [editing, setEditing] = useState<PersonalNote | 'new' | null>(null);
   const [deleting, setDeleting] = useState<PersonalNote | null>(null);
   const [busy, setBusy] = useState(false);
-  // Começo parte feita a MÃO
   function load() { setLoading(true); setError(''); void api.get<PersonalNote[]>('/notes').then(setNotes).catch(caught => setError(caught.message)).finally(() => setLoading(false)); }
   useEffect(load, []);
   async function save(values: NoteValues, existing?: PersonalNote) {
@@ -76,7 +71,6 @@ export function NotesPage() {
     catch (caught) { setError(caught instanceof Error ? caught.message : 'Não foi possível excluir.'); }
     finally { setBusy(false); }
   }
-  // Fim da parte feita a MÃO
   const visible = notes.filter(note => `${note.title} ${note.content} ${note.locationDescription}`.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR'))).sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.updatedAt.localeCompare(a.updatedAt));
   return <section className="page notes-page"><div className="page-heading"><div><span className="eyebrow">Só você tem acesso</span><h1>Anotações</h1><p>Guarde ideias, organize tarefas e leve seus planos com você entre comunidades.</p></div><Button onClick={() => { setError(''); setEditing('new'); }}><Plus size={18} /> Nova anotação</Button></div>
     <label className="notes-search">Buscar anotações<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Título, conteúdo ou local" /></label>
